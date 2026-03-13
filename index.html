@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Py4_</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-size: 17px;
+            line-height: 1.6;
+            color: #000;
+            background: #ffed00;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 100px 40px 120px;
+        }
+
+        header {
+            margin-bottom: 80px;
+            padding-bottom: 48px;
+            border-bottom: 8px solid #000;
+        }
+
+        h1 {
+            font-family: Georgia, serif;
+            font-size: 72px;
+            font-weight: 900;
+            margin-bottom: 20px;
+            letter-spacing: -0.05em;
+            color: #000;
+            line-height: 1;
+            text-transform: uppercase;
+        }
+
+        .cursor {
+            display: inline-block;
+            width: 10px;
+            height: 19px;
+            background: #000;
+            margin-left: 4px;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 49% {
+                opacity: 1;
+            }
+            50%, 100% {
+                opacity: 0;
+            }
+        }
+
+        .tagline {
+            font-family: Verdana, Geneva, sans-serif;
+            font-size: 19px;
+            color: #000;
+            font-weight: 500;
+        }
+
+        nav {
+            margin-top: 36px;
+            font-size: 16px;
+            display: flex;
+            gap: 8px;
+        }
+
+        nav a {
+            color: #000;
+            text-decoration: none;
+            padding: 12px 20px;
+            background: #ffed00;
+            border: 3px solid #000;
+            transition: all 0.15s;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-size: 13px;
+        }
+
+        nav a:hover {
+            background: #000;
+            color: #ffed00;
+        }
+
+        .posts-list {
+            list-style: none;
+        }
+
+        .post-item {
+            margin-bottom: 40px;
+            padding: 40px;
+            background: #fff;
+            border: 6px solid #000;
+            transition: all 0.15s;
+        }
+
+        .post-item:hover {
+            transform: translateX(8px);
+        }
+
+        .post-date {
+            font-size: 12px;
+            color: #000;
+            margin-bottom: 16px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            background: #ffed00;
+            display: inline-block;
+            padding: 6px 12px;
+            border: 2px solid #000;
+        }
+
+        .post-title {
+            font-family: Impact, 'Arial Black', sans-serif;
+            font-size: 36px;
+            font-weight: 900;
+            color: #000;
+            text-decoration: none;
+            line-height: 1.2;
+            letter-spacing: 0.02em;
+            display: block;
+            transition: color 0.15s;
+            text-transform: uppercase;
+        }
+
+        .post-title:hover {
+            color: #666;
+        }
+
+        footer {
+            font-family: Verdana, Geneva, sans-serif;
+            margin-top: 120px;
+            border-top: 2px solid #000;
+            padding-top: 32px;
+            font-size: 13px;
+            color: #000;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        footer a {
+            color: #000;
+            text-decoration: underline;
+        }
+
+        footer a:hover {
+            color: #666;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 60px 24px 80px;
+            }
+
+            header {
+                padding-bottom: 32px;
+                border-bottom: 4px solid #000;
+            }
+
+            h1 {
+                font-size: 48px;
+            }
+
+            .post-item {
+                padding: 28px;
+                border: 4px solid #000;
+            }
+
+            .post-title {
+                font-size: 26px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Py4_</h1>
+            <p class="tagline">A lens into the entropy of being<span class="cursor"></span></p>
+            <nav>
+                <a href="a.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="#archive">Archive</a>
+            </nav>
+        </header>
+
+        <main>
+            <ul class="posts-list">
+                <li class="post-item">
+                    <div class="post-date">March 13, 2026</div>
+                    <a href="post.html" class="post-title">Welcome to My Blog</a>
+                </li>
+                <li class="post-item">
+                    <div class="post-date">March 10, 2026</div>
+                    <a href="post.html" class="post-title">Getting Started with Static Blogs</a>
+                </li>
+                <li class="post-item">
+                    <div class="post-date">March 5, 2026</div>
+                    <a href="post.html" class="post-title">Your Third Post Title</a>
+                </li>
+            </ul>
+        </main>
+
+        <footer>
+            <p>Keeping it under <a href="https://endtimes.dev/why-your-website-should-be-under-14kb-in-size/" target="_blank">14kb</a></p>
+        </footer>
+    </div>
+</body>
+</html>
