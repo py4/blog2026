@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noai, noimageai">
+<title>Places I've Been - Py4_</title>
+<meta name="description" content="Places I've traveled around the world">
+<link rel="preload" as="image" href="photo.webp">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:17px;line-height:1.6;color:#000;background:#ffed00;padding:0}
+.c{max-width:900px;margin:0 auto;padding:100px 40px 120px}
+.b{border:8px solid #000}
+.b6{border:6px solid #000}
+.b4{border:4px solid #000}
+.b3{border:3px solid #000}
+.b2{border:2px solid #000}
+.bb{border-bottom:8px solid #000}
+.bt{border-top:2px solid #000}
+.bg{background:#ffed00}
+.bgw{background:#fff}
+.bgb{background:#000}
+.f9{font-weight:900}
+.f6{font-weight:600}
+.f5{font-weight:500}
+.tu{text-transform:uppercase}
+.im{font-family:Impact,'Arial Black',sans-serif}
+.vd{font-family:Verdana,Geneva,sans-serif}
+.ge{font-family:Georgia,serif}
+.mn{font-family:ui-monospace,'SF Mono',Menlo,monospace}
+.ss{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif}
+.ib{display:inline-block}
+.db{display:block}
+.tr{transition:all .15s}
+header{margin-bottom:80px;padding-bottom:48px;padding-top:40px;position:sticky;top:0;background:#ffed00;z-index:100}
+.scroll-progress{position:fixed;top:0;left:0;width:0%;height:6px;background:#000;z-index:200;transition:width .1s}
+h1{font-size:72px;font-weight:900;line-height:1;letter-spacing:-.05em;margin-bottom:20px;color:#000;display:flex;justify-content:space-between;align-items:center}
+h1 a{color:#000;text-decoration:none}
+.photo{height:72px}
+.tg{font-size:19px}
+.cur{width:10px;height:19px;margin-left:4px;animation:bk 1s infinite}
+@keyframes bk{0%,49%{opacity:1}50%,100%{opacity:0}}
+nav{margin-top:36px;font-size:16px;display:flex;gap:8px}
+.btn{color:#000;text-decoration:none;padding:12px 20px;font-size:13px;letter-spacing:.05em}
+.btn:hover{background:#000;color:#ffed00}
+.btn-active{background:#000;color:#ffed00}
+.map-container{background:#fff;padding:48px;border:8px solid #000;margin-bottom:48px;overflow:visible;position:relative}
+.art h1{font-size:64px;line-height:1.05;margin-bottom:28px;letter-spacing:.02em;padding-bottom:28px}
+.world-map{max-width:100%;height:auto}
+.world-map circle{transition:r .2s,fill .2s}
+.world-map circle:hover{fill:#ffed00;r:16}
+.legend{background:#fff;padding:32px;border:6px solid #000;margin-bottom:48px}
+.legend h2{font-size:32px;margin-bottom:24px;font-family:Impact,'Arial Black',sans-serif;text-transform:uppercase}
+.legend p{font-size:16px}
+.country-label{position:absolute;background:#000;color:#ffed00;padding:8px 16px;font-family:Impact,sans-serif;font-size:14px;font-weight:900;border:3px solid #000;pointer-events:none;opacity:0;transition:opacity .2s;white-space:nowrap;z-index:10}
+.country-label.active{opacity:1}
+footer{margin-top:120px;padding-top:32px;font-size:13px;color:#000;text-align:center}
+footer a{color:#000;text-decoration:underline}
+footer a:hover{color:#666}
+@media(max-width:768px){
+.c{padding:60px 24px 80px;max-width:100%}
+header{padding-bottom:32px;border-bottom:4px solid #000}
+h1{font-size:48px}
+.photo{height:48px}
+.map-container{padding:20px;border:4px solid #000}
+.legend{padding:20px;border:4px solid #000}
+}
+</style>
+</head>
+<body>
+<div class="scroll-progress"></div>
+<div class="c">
+<header class="bb">
+<h1 class="ge tu"><a href="index.html">Py4_</a><img src="photo.webp" alt="Profile photo" class="photo"></h1>
+<p class="tg vd f5">A lens into the entropy of being<span class="cur ib bgb"></span></p>
+<nav>
+<a href="index.html" class="btn ss f9 tu bg b3 tr">Home</a>
+<a href="about.html" class="btn ss f9 tu bg b3 tr">About</a>
+<a href="contact.html" class="btn ss f9 tu bg b3 tr">Contact</a>
+<a href="places.html" class="btn btn-active ss f9 tu bgb b3 tr">Places</a>
+</nav>
+</header>
+<main>
+<div class="map-container art" style="position:relative">
+    <h1 class="im tu bb">Countries I've Visited</h1>
+
+<div class="country-label" id="tooltip"></div>
+<svg class="world-map" viewBox="0 0 1000 500" xmlns="http://www.w3.org/2000/svg">
+<!-- Ocean background -->
+<rect x="0" y="0" width="1000" height="500" fill="#0066cc"/>
+<!-- North America - wider at top, narrower at bottom -->
+<polygon points="50,100 180,80 200,120 190,180 170,220 130,240 90,200 60,150" fill="#000" stroke="#fff" stroke-width="4"/>
+
+<!-- South America - narrower, tilted -->
+<polygon points="140,260 170,250 185,280 190,330 180,380 160,400 135,390 125,340 130,290" fill="#000" stroke="#fff" stroke-width="4"/>
+
+<!-- Europe - small, irregular -->
+<polygon points="400,110 450,100 480,120 470,150 440,160 410,145" fill="#000" stroke="#fff" stroke-width="4"/>
+
+<!-- Africa - wider at top, pointed bottom -->
+<polygon points="420,180 500,170 540,210 545,280 530,340 490,370 450,360 430,320 415,260 418,220" fill="#000" stroke="#fff" stroke-width="4"/>
+
+<!-- Asia - large, irregular mass -->
+<polygon points="500,70 620,60 720,80 780,120 790,170 770,210 720,240 650,250 580,230 540,200 520,160 505,120" fill="#000" stroke="#fff" stroke-width="4"/>
+
+<!-- Australia - horizontal oval shape -->
+<polygon points="720,300 800,290 850,320 840,360 790,380 730,375 710,340" fill="#000" stroke="#fff" stroke-width="4"/>
+
+<!-- Visited markers -->
+<!-- Canada -->
+<circle cx="130" cy="140" r="12" fill="#f00" stroke="#000" stroke-width="3" style="cursor:pointer" class="country-marker" data-country="Canada"/>
+<!-- United States -->
+<circle cx="140" cy="175" r="12" fill="#f00" stroke="#000" stroke-width="3" style="cursor:pointer" class="country-marker" data-country="United States"/>
+<!-- Mexico -->
+<circle cx="110" cy="210" r="12" fill="#f00" stroke="#000" stroke-width="3" style="cursor:pointer" class="country-marker" data-country="Mexico"/>
+<!-- Costa Rica -->
+<circle cx="125" cy="245" r="12" fill="#f00" stroke="#000" stroke-width="3" style="cursor:pointer" class="country-marker" data-country="Costa Rica"/>
+<!-- Colombia -->
+<circle cx="150" cy="270" r="12" fill="#f00" stroke="#000" stroke-width="3" style="cursor:pointer" class="country-marker" data-country="Colombia"/>
+<!-- UK -->
+<circle cx="430" cy="125" r="12" fill="#f00" stroke="#000" stroke-width="3" style="cursor:pointer" class="country-marker" data-country="United Kingdom"/>
+<!-- Netherlands -->
+<circle cx="445" cy="115" r="12" fill="#f00" stroke="#000" stroke-width="3" style="cursor:pointer" class="country-marker" data-country="Netherlands"/>
+<!-- Germany -->
+<circle cx="460" cy="125" r="12" fill="#f00" stroke="#000" stroke-width="3" style="cursor:pointer" class="country-marker" data-country="Germany"/>
+<!-- Spain -->
+<circle cx="415" cy="140" r="12" fill="#f00" stroke="#000" stroke-width="3" style="cursor:pointer" class="country-marker" data-country="Spain"/>
+<!-- Portugal -->
+<circle cx="395" cy="145" r="12" fill="#f00" stroke="#000" stroke-width="3" style="cursor:pointer" class="country-marker" data-country="Portugal"/>
+<!-- Azores Islands -->
+<circle cx="350" cy="135" r="12" fill="#f00" stroke="#000" stroke-width="3" style="cursor:pointer" class="country-marker" data-country="Azores Islands"/>
+<!-- Turkey -->
+<circle cx="530" cy="155" r="12" fill="#f00" stroke="#000" stroke-width="3" style="cursor:pointer" class="country-marker" data-country="Turkey"/>
+<!-- Lebanon -->
+<circle cx="510" cy="165" r="12" fill="#f00" stroke="#000" stroke-width="3" style="cursor:pointer" class="country-marker" data-country="Lebanon"/>
+<!-- Iran -->
+<circle cx="620" cy="160" r="12" fill="#f00" stroke="#000" stroke-width="3" style="cursor:pointer" class="country-marker" data-country="Iran"/>
+<!-- Hong Kong -->
+<circle cx="750" cy="180" r="12" fill="#f00" stroke="#000" stroke-width="3" style="cursor:pointer" class="country-marker" data-country="Hong Kong"/>
+<!-- Malaysia -->
+<circle cx="730" cy="210" r="12" fill="#f00" stroke="#000" stroke-width="3" style="cursor:pointer" class="country-marker" data-country="Malaysia"/>
+<!-- Singapore -->
+<circle cx="735" cy="220" r="12" fill="#f00" stroke="#000" stroke-width="3" style="cursor:pointer" class="country-marker" data-country="Singapore"/>
+
+<!-- Labels -->
+<text x="125" y="70" font-family="Impact,sans-serif" font-size="18" font-weight="900" fill="#000" text-anchor="middle">N. AMERICA</text>
+<text x="155" y="415" font-family="Impact,sans-serif" font-size="18" font-weight="900" fill="#000" text-anchor="middle">S. AMERICA</text>
+<text x="445" y="95" font-family="Impact,sans-serif" font-size="18" font-weight="900" fill="#000" text-anchor="middle">EUROPE</text>
+<text x="470" y="390" font-family="Impact,sans-serif" font-size="18" font-weight="900" fill="#000" text-anchor="middle">AFRICA</text>
+<text x="640" y="55" font-family="Impact,sans-serif" font-size="18" font-weight="900" fill="#000" text-anchor="middle">ASIA</text>
+<text x="775" y="285" font-family="Impact,sans-serif" font-size="18" font-weight="900" fill="#000" text-anchor="middle">AUSTRALIA</text>
+</svg>
+</div>
+</main>
+<footer class="vd f6 bt">
+<p>Keeping it under <a href="https://endtimes.dev/why-your-website-should-be-under-14kb-in-size/" target="_blank">14kb</a></p>
+</footer>
+</div>
+<script>
+window.addEventListener('scroll',()=>{
+const h=document.documentElement.scrollHeight-window.innerHeight;
+const p=(window.scrollY/h)*100;
+document.querySelector('.scroll-progress').style.width=p+'%';
+});
+
+const markers=document.querySelectorAll('.country-marker');
+const tooltip=document.getElementById('tooltip');
+const mapContainer=document.querySelector('.map-container');
+
+markers.forEach(marker=>{
+marker.addEventListener('mouseenter',e=>{
+const country=e.target.getAttribute('data-country');
+const cx=parseFloat(e.target.getAttribute('cx'));
+const cy=parseFloat(e.target.getAttribute('cy'));
+const svg=e.target.closest('svg');
+const svgRect=svg.getBoundingClientRect();
+const containerRect=mapContainer.getBoundingClientRect();
+const x=(cx/1000)*svgRect.width + (svgRect.left - containerRect.left);
+const y=(cy/500)*svgRect.height + (svgRect.top - containerRect.top);
+tooltip.textContent=country;
+tooltip.style.left=x+'px';
+tooltip.style.top=(y+40)+'px';
+tooltip.style.transform='translateX(-50%)';
+tooltip.classList.add('active');
+});
+marker.addEventListener('mouseleave',()=>{
+tooltip.classList.remove('active');
+});
+});
+</script>
+</body>
+</html>
