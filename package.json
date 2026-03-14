@@ -1,0 +1,14 @@
+{
+  "name": "py4-blog",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "build": "node build.mjs"
+  },
+  "devDependencies": {
+    "@minify-html/node": "^0.15.0",
+    "lightningcss": "^1.24.1",
+    "esbuild": "^0.20.2",
+    "glob": "^10.3.10"
+  }
+}
