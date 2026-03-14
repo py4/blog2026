@@ -40,7 +40,8 @@ body{font-family:Georgia,serif;font-size:17px;line-height:1.7;color:#000;backgro
 .ib{display:inline-block}
 .db{display:block}
 .tr{transition:all .15s}
-header{margin-bottom:80px;padding-bottom:48px}
+header{margin-bottom:80px;padding-bottom:48px;padding-top:40px;position:sticky;top:0;background:#ffed00;z-index:100}
+.scroll-progress{position:fixed;top:0;left:0;width:0%;height:6px;background:#000;z-index:200;transition:width .1s}
 h1{font-size:72px;font-weight:900;line-height:1;letter-spacing:-.05em;margin-bottom:20px;color:#000;display:flex;justify-content:space-between;align-items:center}
 h1 a{color:#000;text-decoration:none}
 .photo{height:72px}
@@ -84,6 +85,7 @@ h1{font-size:48px}
 </style>
 </head>
 <body>
+<div class="scroll-progress"></div>
 <div class="c">
 <header class="bb">
 <h1 class="ge tu"><a href="index.html">Py4_</a><img src="photo.webp" alt="Profile photo" class="photo"></h1>
@@ -149,5 +151,12 @@ git push origin main</code></pre>
 <p>Keeping it under <a href="https://endtimes.dev/why-your-website-should-be-under-14kb-in-size/" target="_blank">14kb</a></p>
 </footer>
 </div>
+<script>
+window.addEventListener('scroll',()=>{
+const h=document.documentElement.scrollHeight-window.innerHeight;
+const p=(window.scrollY/h)*100;
+document.querySelector('.scroll-progress').style.width=p+'%';
+});
+</script>
 </body>
 </html>
