@@ -67,6 +67,14 @@ async function build() {
     }
   }
 
+  // Copy image files from src/
+  const imageFiles = await glob("src/**/*.{png,jpg,jpeg,gif,svg,webp,ico}")
+  for (const file of imageFiles) {
+    const outFile = file.replace("src/", "dist/")
+    await fs.copyFile(file, outFile)
+    console.log(`Copied ${file} → ${outFile}`)
+  }
+
   console.log("\n✅ Build complete!")
 }
 
