@@ -1,229 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="robots" content="noai, noimageai">
-    <title>Py4_ - A lens into the entropy of being</title>
-    <meta name="description" content="Personal blog about software engineering, life, and deep thoughts. Writing from Tehran to Canada.">
-
-    <!-- Open Graph / Social Media -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://blog2026-1bm.pages.dev/">
-    <meta property="og:title" content="Py4_ - A lens into the entropy of being">
-    <meta property="og:description" content="Personal blog about software engineering, life, and deep thoughts. Writing from Tehran to Canada.">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            font-size: 17px;
-            line-height: 1.6;
-            color: #000;
-            background: #ffed00;
-            padding: 0;
-        }
-
-        .container {
-            max-width: 720px;
-            margin: 0 auto;
-            padding: 100px 40px 120px;
-        }
-
-        header {
-            margin-bottom: 80px;
-            padding-bottom: 48px;
-            border-bottom: 8px solid #000;
-        }
-
-        h1 {
-            font-family: Georgia, serif;
-            font-size: 72px;
-            font-weight: 900;
-            margin-bottom: 20px;
-            letter-spacing: -0.05em;
-            color: #000;
-            line-height: 1;
-            text-transform: uppercase;
-        }
-
-        .cursor {
-            display: inline-block;
-            width: 10px;
-            height: 19px;
-            background: #000;
-            margin-left: 4px;
-            animation: blink 1s infinite;
-        }
-
-        @keyframes blink {
-            0%, 49% {
-                opacity: 1;
-            }
-            50%, 100% {
-                opacity: 0;
-            }
-        }
-
-        .tagline {
-            font-family: Verdana, Geneva, sans-serif;
-            font-size: 19px;
-            color: #000;
-            font-weight: 500;
-        }
-
-        nav {
-            margin-top: 36px;
-            font-size: 16px;
-            display: flex;
-            gap: 8px;
-        }
-
-        nav a {
-            color: #000;
-            text-decoration: none;
-            padding: 12px 20px;
-            background: #ffed00;
-            border: 3px solid #000;
-            transition: all 0.15s;
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            font-size: 13px;
-        }
-
-        nav a:hover {
-            background: #000;
-            color: #ffed00;
-        }
-
-        .posts-list {
-            list-style: none;
-        }
-
-        .post-item {
-            margin-bottom: 40px;
-            padding: 40px;
-            background: #fff;
-            border: 6px solid #000;
-            transition: all 0.15s;
-        }
-
-        .post-item:hover {
-            transform: translateX(8px);
-        }
-
-        .post-date {
-            font-size: 12px;
-            color: #000;
-            margin-bottom: 16px;
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            background: #ffed00;
-            display: inline-block;
-            padding: 6px 12px;
-            border: 2px solid #000;
-        }
-
-        .post-title {
-            font-family: Impact, 'Arial Black', sans-serif;
-            font-size: 36px;
-            font-weight: 900;
-            color: #000;
-            text-decoration: none;
-            line-height: 1.2;
-            letter-spacing: 0.02em;
-            display: block;
-            transition: color 0.15s;
-            text-transform: uppercase;
-        }
-
-        .post-title:hover {
-            color: #666;
-        }
-
-        footer {
-            font-family: Verdana, Geneva, sans-serif;
-            margin-top: 120px;
-            border-top: 2px solid #000;
-            padding-top: 32px;
-            font-size: 13px;
-            color: #000;
-            text-align: center;
-            font-weight: 600;
-        }
-
-        footer a {
-            color: #000;
-            text-decoration: underline;
-        }
-
-        footer a:hover {
-            color: #666;
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                padding: 60px 24px 80px;
-            }
-
-            header {
-                padding-bottom: 32px;
-                border-bottom: 4px solid #000;
-            }
-
-            h1 {
-                font-size: 48px;
-            }
-
-            .post-item {
-                padding: 28px;
-                border: 4px solid #000;
-            }
-
-            .post-title {
-                font-size: 26px;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noai, noimageai">
+<title>Py4_ - A lens into the entropy of being</title>
+<meta name="description" content="Personal blog about software engineering, life, and deep thoughts. Writing from Tehran to Canada.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://blog2026-1bm.pages.dev/">
+<meta property="og:title" content="Py4_ - A lens into the entropy of being">
+<meta property="og:description" content="Personal blog about software engineering, life, and deep thoughts. Writing from Tehran to Canada.">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:17px;line-height:1.6;color:#000;background:#ffed00;padding:0}
+.c{max-width:720px;margin:0 auto;padding:100px 40px 120px}
+.b{border:8px solid #000}
+.b6{border:6px solid #000}
+.b4{border:4px solid #000}
+.b3{border:3px solid #000}
+.b2{border:2px solid #000}
+.bb{border-bottom:8px solid #000}
+.bt{border-top:2px solid #000}
+.bg{background:#ffed00}
+.bgw{background:#fff}
+.bgb{background:#000}
+.f9{font-weight:900}
+.f6{font-weight:600}
+.f5{font-weight:500}
+.tu{text-transform:uppercase}
+.im{font-family:Impact,'Arial Black',sans-serif}
+.vd{font-family:Verdana,Geneva,sans-serif}
+.ge{font-family:Georgia,serif}
+.ib{display:inline-block}
+.db{display:block}
+.tr{transition:all .15s}
+header{margin-bottom:80px;padding-bottom:48px}
+h1{font-size:72px;font-weight:900;line-height:1;letter-spacing:-.05em;margin-bottom:20px;color:#000}
+h1 a{color:#000;text-decoration:none}
+.tg{font-size:19px}
+.cur{width:10px;height:19px;margin-left:4px;animation:bk 1s infinite}
+@keyframes bk{0%,49%{opacity:1}50%,100%{opacity:0}}
+nav{margin-top:36px;font-size:16px;display:flex;gap:8px}
+.btn{color:#000;text-decoration:none;padding:12px 20px;font-size:13px;letter-spacing:.05em}
+.btn:hover{background:#000;color:#ffed00}
+.pl{list-style:none}
+.box{margin-bottom:40px;padding:40px}
+.box:hover{transform:translateX(8px)}
+.dt{font-size:12px;color:#000;margin-bottom:16px;letter-spacing:.1em;padding:6px 12px}
+.ti{font-size:36px;color:#000;text-decoration:none;line-height:1.2;letter-spacing:.02em}
+.ti:hover{color:#666}
+footer{margin-top:120px;padding-top:32px;font-size:13px;color:#000;text-align:center}
+footer a{color:#000;text-decoration:underline}
+footer a:hover{color:#666}
+@media(max-width:768px){
+.c{padding:60px 24px 80px}
+header{padding-bottom:32px;border-bottom:4px solid #000}
+h1{font-size:48px}
+.box{padding:28px;border:4px solid #000}
+.ti{font-size:26px}
+}
+</style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>Py4_</h1>
-            <p class="tagline">A lens into the entropy of being<span class="cursor"></span></p>
-            <nav>
-                <a href="index.html">Home</a>
-                <a href="about.html">About</a>
-                <a href="#archive">Archive</a>
-            </nav>
-        </header>
-
-        <main>
-            <ul class="posts-list">
-                <li class="post-item">
-                    <div class="post-date">March 13, 2026</div>
-                    <a href="post.html" class="post-title">Welcome to My Blog</a>
-                </li>
-                <li class="post-item">
-                    <div class="post-date">March 10, 2026</div>
-                    <a href="post.html" class="post-title">Getting Started with Static Blogs</a>
-                </li>
-                <li class="post-item">
-                    <div class="post-date">March 5, 2026</div>
-                    <a href="post.html" class="post-title">Your Third Post Title</a>
-                </li>
-            </ul>
-        </main>
-
-        <footer>
-            <p>Keeping it under <a href="https://endtimes.dev/why-your-website-should-be-under-14kb-in-size/" target="_blank">14kb</a></p>
-        </footer>
-    </div>
+<div class="c">
+<header class="bb">
+<h1 class="ge tu"><a href="index.html">Py4_</a></h1>
+<p class="tg vd f5">A lens into the entropy of being<span class="cur ib bgb"></span></p>
+<nav>
+<a href="index.html" class="btn im f9 tu bg b3 tr">Home</a>
+<a href="about.html" class="btn im f9 tu bg b3 tr">About</a>
+<a href="#archive" class="btn im f9 tu bg b3 tr">Archive</a>
+</nav>
+</header>
+<main>
+<ul class="pl">
+<li class="box bgw b6 tr">
+<div class="dt f9 tu bg b2 ib">March 13, 2026</div>
+<a href="post.html" class="ti im f9 tu db tr">Welcome to My Blog</a>
+</li>
+<li class="box bgw b6 tr">
+<div class="dt f9 tu bg b2 ib">March 10, 2026</div>
+<a href="post.html" class="ti im f9 tu db tr">Getting Started with Static Blogs</a>
+</li>
+<li class="box bgw b6 tr">
+<div class="dt f9 tu bg b2 ib">March 5, 2026</div>
+<a href="post.html" class="ti im f9 tu db tr">Your Third Post Title</a>
+</li>
+</ul>
+</main>
+<footer class="vd f6 bt">
+<p>Keeping it under <a href="https://endtimes.dev/why-your-website-should-be-under-14kb-in-size/" target="_blank">14kb</a></p>
+</footer>
+</div>
 </body>
 </html>

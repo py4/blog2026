@@ -18,17 +18,23 @@ async function build() {
 
     let html = await fs.readFile(file, "utf8")
 
-    // Extract and minify inline CSS
+    // Extract and minify inline CSS with maximum compression
     html = html.replace(/<style>([\s\S]*?)<\/style>/g, (match, css) => {
       const result = transform({
         filename: "inline.css",
         code: Buffer.from(css),
-        minify: true
+        minify: true,
+        targets: {
+          // Support only modern browsers for smaller output
+          chrome: 90,
+          firefox: 88,
+          safari: 14
+        }
       })
       return `<style>${result.code.toString()}</style>`
     })
 
-    // Minify HTML
+    // Minify HTML with MAXIMUM aggression
     const minified = minify(Buffer.from(html), {
       do_not_minify_doctype: false,
       ensure_spec_compliant_unquoted_attribute_values: false,
@@ -39,7 +45,8 @@ async function build() {
       minify_css: true,
       minify_js: true,
       remove_bangs: true,
-      remove_processing_instructions: true
+      remove_processing_instructions: true,
+      remove_spaces_between_attr_and_value: true
     })
 
     // Write output
