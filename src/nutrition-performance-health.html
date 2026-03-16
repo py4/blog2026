@@ -4,12 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noai, noimageai">
-<title>Browser Sessions Are All-or-Nothing - Py4_</title>
-<meta name="description" content="Web sessions assume a human is in control. But when AI agents take over your browser, you're either logged in with full permissions or not. We need selective authorization—read-only modes, proof-of-human-intent, and agent-aware backends.">
+<title>Protein Math and Not Dying - Py4_</title>
+<meta name="description" content="Personal notes on hitting protein targets, high-efficiency protein sources, cruciferous vegetables, and fiber. Maintenance vs bulk, the 80/20 rule, and broccoli sprouts.">
 <meta property="og:type" content="article">
-<meta property="og:url" content="https://blog2026-1bm.pages.dev/browser-sessions-all-or-nothing.html">
-<meta property="og:title" content="Browser Sessions Are All-or-Nothing">
-<meta property="og:description" content="Web sessions assume a human is in control. But when AI agents take over your browser, you're either logged in with full permissions or not. We need selective authorization—read-only modes, proof-of-human-intent, and agent-aware backends.">
+<meta property="og:url" content="https://blog2026-1bm.pages.dev/nutrition-performance-health.html">
+<meta property="og:title" content="Protein Math and Not Dying">
+<meta property="og:description" content="Personal notes on hitting protein targets, high-efficiency protein sources, cruciferous vegetables, and fiber. Maintenance vs bulk, the 80/20 rule, and broccoli sprouts.">
 <link rel="preload" as="image" href="photo.webp">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -73,6 +73,10 @@ nav::after{content:'';position:absolute;bottom:0;left:40px;right:40px;height:8px
 .ct hr{border:none;height:6px;margin:80px 0}
 .ct em{font-style:italic}
 .ct strong{font-weight:900}
+.ct table{width:100%;border-collapse:collapse;margin:32px 0;font-size:15px}
+.ct th,.ct td{border:2px solid #000;padding:12px;text-align:left}
+.ct th{background:#000;color:#ffed00;font-weight:900;font-family:Impact,'Arial Black',sans-serif;text-transform:uppercase;letter-spacing:.05em}
+.ct td{background:#fff}
 footer{margin-top:120px;padding-top:32px;font-size:13px;color:#000;text-align:center}
 footer a{color:#000;text-decoration:underline}
 footer a:hover{color:#666}
@@ -94,6 +98,7 @@ nav::after{left:24px;right:24px;height:4px}
 .art h1{font-size:42px;border-bottom:6px solid #000;padding-bottom:20px}
 .ct h2{font-size:34px;padding:16px 20px;border:4px solid #000}
 .ct h3{font-size:26px}
+.ct table{font-size:13px;overflow-x:auto;display:block}
 }
 </style>
 </head>
@@ -112,29 +117,115 @@ nav::after{left:24px;right:24px;height:4px}
 <a href="photography.html" class="btn ss f9 tu bg b3 tr">Photography</a>
 </nav>
 <article class="art bgw b">
-<h1 class="im tu bb">Browser Sessions Are All-or-Nothing</h1>
-<div class="pm im f9 tu bg b3 ib">March 15, 2026</div>
+<h1 class="im tu bb">Protein Math and Not Dying</h1>
+<div class="pm im f9 tu bg b3 ib">March 16, 2026</div>
 <div class="ct">
-<h3 class="im f9 tu bb4">The Trust Gap</h3>
-<p>If you're following the "ClawVerse" (<a href="https://github.com/openclaw/openclaw" target="_blank">OpenClaw</a>, <a href="https://www.moltbook.com/" target="_blank">MoltBook</a>), you know the promise: an AI agent with unrestricted OS access and a library of automation skills. It's powerful, but from Day 0, the security implications have been glaring. Giving an LLM access to un-sandboxed personal data creates a massive vulnerability surface, ranging from standard <a href="https://simonwillison.net/2022/Sep/12/prompt-injection/" target="_blank">prompt injection</a> to <a href="https://techcrunch.com/2026/02/23/a-meta-ai-security-researcher-said-an-openclaw-agent-ran-amok-on-her-inbox/" target="_blank">unintended data purges</a>.</p>
-<p>The current trajectory looks like AI agents will be handling our personal and professional automation. While biking today, I was thinking about the "solution" to this trust gap. Current fixes usually involve isolation—remote VMs, local virtualization, or the <a href="https://www.tomshardware.com/tech-industry/artificial-intelligence/openclaw-fueled-ordering-frenzy-creates-apple-mac-shortage-delivery-for-high-unified-memory-units-now-ranges-from-6-days-to-6-weeks" target="_blank">dedicated Mac Mini clusters</a> we're seeing pop up.</p>
-<p>The problem is <strong>Isolation limits utility.</strong> If you sandbox the agent away from your data, it can't actually help you. 
+<h3 class="im f9 tu bb4">Protein targets</h3>
+<p>Maintain: ~120g protein/day<br>
+Bulk: ~150g protein/day</p>
 
-One solution is calling out for more widespread OAuth 2 support. <a href="https://oauth.net/2/scope/" target="_blank">OAuth 2 scopes</a>  allow for selective authorization (Read vs. Write), but they aren't being adopted fast enough. If you're developing a service today, supporting granular OAuth scopes isn't just a feature; it's a prerequisite for the agent economy.</p>
-<h3 class="im f9 tu bb4">Sessions Assume Human Control</h3>
-<p>OAuth doesn't solve everything. Many agents, like OpenClaw, interact with the browser via Remote CDP (Chrome DevTools Protocol). This is a session-based workflow.</p>
-<p>The fundamental flaw in modern web architecture is the assumption that the entity controlling an active session is a human. We assume the user knows exactly what they are doing at every click. In an AI-driven workflow, that assumption vanishes. A session might be driven by a human, an AI, or a "centaur" mix of both.</p>
-<p>Imagine your agent has access to your LinkedIn session to monitor job postings. You want it to <strong>Read</strong>, but you likely don't want it to <strong>Write</strong>—the risk of an LLM hallucinating a career-ending post to your professional network is too high. Yet, current web sessions are binary: you are either logged in with full permissions, or you aren't.</p>
-<h3 class="im f9 tu bb4">Design Patterns for Agent-Ready Backends</h3>
-<p>We need to rethink authorization so that users can enable or disable "Write" access for specific journeys. We need to build services that assume an agent might be at the wheel. Here are three patterns I'm considering:</p>
+<p>My plan:</p>
 <ul>
-<li><strong>User-Gated Session Scopes:</strong> Websites could allow users to toggle a "Read-Only" mode for a current session, protected by a password or biometric check that the agent doesn't know. You flip the switch, the AI takes over the browser, and the backend rejects any <code class="mn">POST</code> or <code class="mn">DELETE</code> requests until you manually re-authorize.</li>
-<li><strong>The <code class="mn">REQUEST_MADE_BY_AI</code> Header:</strong> Browsers could signal when a request is initiated via CDP or automation APIs. While spoofable and also not foolproof (especially for <a href="https://openai.com/index/computer-using-agent/" target="_blank">computer-use agents</a> looking at raw pixels), it provides a signal for backends to trigger extra verification for sensitive actions.</li>
-<li><strong>Proof of Human Intent:</strong> Certain "Write" actions could require a human-in-the-loop signature—like a biometric check on a phone—to sign a specific transaction generated by the agent.</li>
+<li>Lunch: 30g</li>
+<li>Dinner: 30g</li>
+<li>Whey: 40g</li>
+<li>The rest: canned tuna, Greek yogurt, cooked chilled shrimp, or just add breakfast</li>
 </ul>
-<h3 class="im f9 tu bb4">Conclusion</h3>
-<p>The takeaway is simple: when building a service in 2026, assume an AI will eventually use it. If we don't build the infrastructure for "selective trust" now, we'll be forced to choose between total isolation or total vulnerability.</p>
-<p><strong>P.S.</strong> It's worth noting that none of this "solves" prompt injection entirely. An agent with Read-only access can still be tricked into exfiltrating your data to an attacker's server. We're solving for <em>unintended action</em>, but <em>unintended disclosure</em> remains the next great frontier.</p>
+<p>Should limit red meat to twice a week. I eat too much => fish, poultry, beans, lentils, tofu are better (lean protein, lower disease risk).</p>
+
+<h3 class="im f9 tu bb4">Healthy plate composition</h3>
+<ul>
+<li><strong>50% vegetables and fruits:</strong> I was worried about calories but berries are super low-cal (~50-60 cal/cup) and high in polyphenols that reduce inflammation from training. Blackberries, raspberries, strawberries. Half an apple is only ~50 cal and the fiber makes me feel fuller way longer than junk food.</li>
+<li><strong>25% lean protein:</strong> Fish, poultry, beans, lentils, tofu. Red meat max once or twice a week.</li>
+<li><strong>25% whole grains:</strong> Quinoa, farro, brown rice, oats. Sustained energy, no insulin spikes.</li>
+</ul>
+
+<h3 class="im f9 tu bb4">The math</h3>
+<p>If I'm hitting ~160g protein while staying under ~2000 cal, I have more room than I thought.</p>
+<ul>
+<li>160g protein = 640 cal</li>
+<li>Remaining budget = ~1360 cal</li>
+</ul>
+
+<h2 class="im f9 tu bg b6">High-Efficiency Protein Sources</h2>
+<table>
+<thead>
+<tr>
+<th>Source (100g)</th>
+<th>Protein</th>
+<th>Calories</th>
+<th>Efficiency</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Egg Whites</strong></td>
+<td>~11g</td>
+<td>52</td>
+<td>High (pure protein)</td>
+</tr>
+<tr>
+<td><strong>Chicken Breast</strong></td>
+<td>~31g</td>
+<td>165</td>
+<td>Very High</td>
+</tr>
+<tr>
+<td><strong>White Fish (Cod/Tilapia)</strong></td>
+<td>~20g</td>
+<td>90</td>
+<td>Very High</td>
+</tr>
+<tr>
+<td><strong>0% Greek Yogurt</strong></td>
+<td>~10g</td>
+<td>59</td>
+<td>High</td>
+</tr>
+<tr>
+<td><strong>Tofu (Firm)</strong></td>
+<td>~10g</td>
+<td>83</td>
+<td>Moderate</td>
+</tr>
+<tr>
+<td><strong>Seitan</strong></td>
+<td>~25g</td>
+<td>141</td>
+<td>Very High (Plant-based)</td>
+</tr>
+</tbody>
+</table>
+
+<h3 class="im f9 tu bb4">Lean red meat strategy</h3>
+<p><strong>Acidic marinades:</strong> Marinating steak in lemon juice, vinegar, or red wine for just 20 minutes reduces HCA (from charring/grilling/searing) by up to <strong>90%</strong>. The antioxidants act as a chemical shield.</p>
+
+<h3 class="im f9 tu bb4">80/20 rule</h3>
+<p>Whole, unprocessed foods 80% of the time. 20% flexibility for social meals or treats. Keeps it mentally sustainable.</p>
+
+<h2 class="im f9 tu bg b6">Cruciferous vegetables</h2>
+<p>Broccoli, cauliflower, Brussels sprouts, arugula, kale contain <strong>glucosinolates</strong>. When I chew them, these break down into <strong>isothiocyanates</strong> and <strong>indoles</strong>:</p>
+<ul>
+<li><strong>Detoxify carcinogens:</strong> Stimulate liver enzymes that neutralize harmful compounds (including HCAs from seared meat)</li>
+<li><strong>Inhibit tumor growth:</strong> Induce apoptosis (programmed cell death) in damaged cells before they turn cancerous</li>
+</ul>
+
+<h3 class="im f9 tu bb4">Fiber = physical filter</h3>
+<p>AICR target: <strong>30g fiber/day</strong></p>
+<ul>
+<li>Speeds up transit time = less time for carcinogens to contact intestinal lining</li>
+<li>Gut bacteria ferment fiber → produce <strong>butyrate</strong> (short-chain fatty acid that fuels colon cells)</li>
+</ul>
+<p>My strategy: skip high-cal grains, get fiber from <strong>raspberries</strong> (8g fiber per 64 cal) or <strong>chia seeds</strong> in protein shakes.</p>
+<p>Add 2 cups of greens to every lunch/dinner.</p>
+
+<h3 class="im f9 tu bb4">Heavy hitters (max DNA protection, min calories)</h3>
+<ul>
+<li><strong>Broccoli sprouts:</strong> Gold medal. <strong>50–100x</strong> the sulforaphane of mature broccoli. Add a handful to protein shake or on top of steak, almost zero calories.</li>
+<li><strong>Arugula:</strong> Very low cal, contains <em>erucin</em> (anti-cancer). Good base for chicken salad.</li>
+<li><strong>Broccoli:</strong> Steam it, don't boil (keeps enzymes active).</li>
+<li><strong>Brussels sprouts:</strong> High fiber and vitamin C. Roast briefly to keep compounds intact.</li>
+</ul>
 </div>
 </article>
 <footer class="vd f6 bt">

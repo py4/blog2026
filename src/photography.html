@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noai, noimageai">
+<title>Photography - Py4_</title>
+<meta name="description" content="Photography portfolio by Pooya">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://blog2026-1bm.pages.dev/photography.html">
+<meta property="og:title" content="Photography - Py4_">
+<meta property="og:description" content="Photography portfolio by Pooya">
+<link rel="preload" as="image" href="photo.webp">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:17px;line-height:1.6;color:#000;background:#F5F5F5;padding:0;max-width:100vw;overflow-x:clip}
+.c{max-width:1200px;margin:0 auto;padding:100px 40px 120px}
+.b{border:8px solid #000}
+.b6{border:6px solid #000}
+.b4{border:4px solid #000}
+.b3{border:3px solid #000}
+.b2{border:2px solid #000}
+.bb{border-bottom:8px solid #000}
+.bt{border-top:2px solid #000}
+.bg{background:#F5F5F5}
+.bgw{background:#fff}
+.bgb{background:#000}
+.bgg{background:#c4c4c4}
+.f9{font-weight:900}
+.f6{font-weight:600}
+.f5{font-weight:500}
+.tu{text-transform:uppercase}
+.im{font-family:Impact,'Arial Black',sans-serif}
+.vd{font-family:Verdana,Geneva,sans-serif}
+.ge{font-family:Georgia,serif}
+.ss{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif}
+.ib{display:inline-block}
+.db{display:block}
+.tr{transition:all .15s}
+header{margin-bottom:80px;padding-bottom:48px;padding-top:40px;position:sticky;top:0;background:#F5F5F5;z-index:100}
+.scroll-progress{position:fixed;top:0;left:0;width:0%;height:6px;background:#000;z-index:200;transition:width .1s}
+h1{font-size:72px;font-weight:900;line-height:1;letter-spacing:-.05em;margin-bottom:20px;color:#000;display:flex;justify-content:space-between;align-items:center}
+h1 a{color:#000;text-decoration:none}
+.photo{height:72px}
+.tg{font-size:19px}
+.cur{width:10px;height:19px;margin-left:4px;animation:bk 1s infinite}
+@keyframes bk{0%,49%{opacity:1}50%,100%{opacity:0}}
+nav{margin-top:36px;font-size:16px;display:flex;gap:8px}
+.btn{color:#000;text-decoration:none;padding:12px 20px;font-size:13px;letter-spacing:.05em}
+.btn:hover{background:#000;color:#ffed00}
+.btn-active{background:#000;color:#ffed00}
+footer{margin-top:120px;padding-top:32px;font-size:13px;color:#000;text-align:center}
+footer a{color:#000;text-decoration:underline}
+footer a:hover{color:#666}
+.hacker-emblem{width:24px;height:24px;display:inline-block;vertical-align:middle;margin-left:8px}
+.portfolio{display:flex;flex-direction:column;gap:6rem}
+.row{display:grid;grid-template-columns:repeat(8,1fr);gap:0.75rem;align-items:start}
+.span-3{grid-column:span 3}
+.span-4{grid-column:span 4}
+.span-5{grid-column:span 5}
+.img-box{background:#c4c4c4;width:100%;display:block}
+.ar-landscape-wide:not(img){aspect-ratio:16/9}
+.ar-landscape:not(img){aspect-ratio:4/3}
+.ar-portrait:not(img){aspect-ratio:3/4}
+img.img-box{width:auto;height:auto;max-width:500px;max-height:450px;background:none;display:block}
+.row > div:first-child{display:flex;justify-content:flex-end}
+.text-col{position:relative;display:flex;flex-direction:column;justify-content:flex-end;height:100%}
+.text-col p{font-family:Impact,'Arial Black',sans-serif;font-size:2.5rem;font-weight:900;letter-spacing:-.5px;line-height:1.1;color:#000}
+.text-content{width:100%;max-width:300px}
+.marker{position:absolute;top:0;background:#ffed00;color:#000;padding:.6rem .25rem;font-size:.65rem;font-weight:bold;text-transform:uppercase;letter-spacing:1px;writing-mode:vertical-rl;transform:rotate(180deg);border:3px solid #000}
+.marker-left .marker{left:0}
+.marker-left .text-content{text-align:left;align-self:flex-start}
+.marker-right .marker{right:0}
+.marker-right .text-content{text-align:right;align-self:flex-end}
+@media(max-width:768px){
+.c{padding:60px 24px 80px}
+header{padding-bottom:32px;border-bottom:4px solid #000}
+h1{font-size:48px}
+.photo{height:48px}
+nav{overflow-x:auto;-webkit-overflow-scrolling:touch;flex-wrap:nowrap;scrollbar-width:none;-ms-overflow-style:none;margin-right:-24px}
+nav::-webkit-scrollbar{display:none}
+.btn{white-space:nowrap;flex-shrink:0}
+.portfolio{gap:4rem}
+.row{display:flex;flex-direction:column;gap:1.5rem}
+.row.text-first{flex-direction:column-reverse}
+.marker-left,.marker-right{padding:0}
+.marker{position:relative;display:inline-block;writing-mode:horizontal-tb;transform:none;padding:.2rem .6rem;margin-bottom:.8rem}
+}
+.old-links{font-size:11px;padding:8px 0;font-family:Verdana,sans-serif}
+.old-links a{color:#00f;text-decoration:underline}
+.old-links a:visited{color:#551a8b}
+.old-links a:hover{color:#f00}
+</style>
+</head>
+<body>
+<div class="scroll-progress"></div>
+<div class="c">
+<header class="bb">
+<h1 class="ge tu"><a href="index.html">Py4_</a><img src="photo.webp" alt="Profile photo" class="photo"></h1>
+<p class="tg vd f5">A lens into the entropy of being<span class="cur ib bgb"></span></p>
+<nav>
+<a href="index.html" class="btn ss f9 tu bg b3 tr">Home</a>
+<a href="about.html" class="btn ss f9 tu bg b3 tr">About</a>
+<a href="contact.html" class="btn ss f9 tu bg b3 tr">Contact</a>
+<a href="places.html" class="btn ss f9 tu bg b3 tr">Places</a>
+<a href="photography.html" class="btn btn-active ss f9 tu bgb b3 tr">Photography</a>
+</nav>
+</header>
+<main class="portfolio">
+<article class="row">
+<div class="span-3">
+<img src="assets/20250601-DSCF0250.jpg" alt="Photo 05" class="img-box ar-portrait">
+</div>
+<div class="span-5 text-col marker-left">
+<div class="marker b3">Photo 05</div>
+<div class="text-content">
+<p>Where the everyday surrenders to a playful moment, joy reveals the hidden meaning of life.</p>
+</div>
+</div>
+</article>
+<article class="row text-first">
+<div class="span-3 text-col marker-right">
+<div class="marker b3">Photo 02</div>
+<div class="text-content">
+<p>I followed my heart and it led me to tacos.</p>
+</div>
+</div>
+<div class="span-5">
+<img src="assets/20260124-DSCF5142-2.jpg" alt="Photo 02" class="img-box ar-landscape-wide">
+</div>
+</article>
+<article class="row">
+<div class="span-4">
+<img src="assets/20260221-DSCF5482.jpg" alt="Photo 03" class="img-box ar-landscape">
+</div>
+<div class="span-4 text-col marker-left">
+<div class="marker b3">Photo 03</div>
+<div class="text-content">
+<p>Even in the middle of winter, you can find a little pocket of sunshine.</p>
+</div>
+</div>
+</article>
+<article class="row text-first">
+<div class="span-4 text-col marker-right">
+<div class="marker b3">Photo 04</div>
+<div class="text-content">
+<p>Chelsea - Liverpool post match at the birth place of Chelsea FC.</p>
+</div>
+</div>
+<div class="span-4">
+<img src="assets/20251004-DSCF3677.jpg" alt="Photo 04" class="img-box ar-landscape">
+</div>
+</article>
+<article class="row">
+<div class="span-5">
+<img src="assets/20250809-DSCF1724.jpg" alt="Photo 01" class="img-box ar-landscape-wide">
+</div>
+<div class="span-3 text-col marker-left">
+<div class="marker b3">Photo 01</div>
+<div class="text-content">
+<p>How many summers live in this river?</p>
+</div>
+</div>
+</article>
+<article class="row text-first">
+<div class="span-5 text-col marker-right">
+<div class="marker b3">Photo 06</div>
+<div class="text-content">
+<p>Sugar, smiles and squad.</p>
+</div>
+</div>
+<div class="span-3">
+<img src="assets/20250622-DSCF0788.jpg" alt="Photo 06" class="img-box ar-portrait">
+</div>
+</article>
+<article class="row">
+<div class="span-4">
+<img src="assets/20250601-DSCF0141.jpg" alt="Photo 07" class="img-box ar-landscape">
+</div>
+<div class="span-4 text-col marker-left">
+<div class="marker b3">Photo 07</div>
+<div class="text-content">
+<p>Silent precision.</p>
+</div>
+</div>
+</article>
+</main>
+<footer class="vd f6 bt">
+<p>Keeping it under <a href="https://endtimes.dev/why-your-website-should-be-under-14kb-in-size/" target="_blank">14kb</a></p>
+<div class="old-links">
+<a href="http://www.catb.org/hacker-emblem/" target="_blank"><img src="glider.png" alt="hacker emblem" class="hacker-emblem"></a> |
+<a href="https://huggingface.co/collections/meta-llama/llama-31" target="_blank" title="Llama models"><span style="font-size:20px">🦙</span></a> |
+<a href="resume.pdf" target="_blank">Resume</a> |
+<a href="https://www.linkedin.com/in/pooyamoradi/" target="_blank">LinkedIn</a> |
+<a href="https://scholar.google.ca/citations?user=JHVXuZkAAAAJ&hl=en" target="_blank">Scholar</a> |
+<a href="https://www.goodreads.com/py4_" target="_blank">Goodreads</a> |
+<a href="https://10kb.club/" target="_blank">10kb Club</a> |
+<a href="https://indieweb.org/" target="_blank">IndieWeb</a>
+</div>
+<div style="text-align:center;margin-top:16px">
+<img src="e1.png" alt="">
+<div style="display:inline-block;margin-left:20px;vertical-align:middle">
+<svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+<circle cx="30" cy="30" r="28" fill="#f00" stroke="#000" stroke-width="3"/>
+<text x="30" y="38" font-family="Impact,sans-serif" font-size="20" font-weight="900" fill="#000" text-anchor="middle">AI</text>
+<line x1="10" y1="10" x2="50" y2="50" stroke="#000" stroke-width="5"/>
+</svg>
+</div>
+</div>
+</footer>
+</div>
+<script>
+window.addEventListener('scroll',()=>{
+const h=document.documentElement.scrollHeight-window.innerHeight;
+const p=(window.scrollY/h)*100;
+document.querySelector('.scroll-progress').style.width=p+'%';
+});
+</script>
+</body>
+</html>
