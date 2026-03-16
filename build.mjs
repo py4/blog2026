@@ -71,6 +71,9 @@ async function build() {
   const imageFiles = await glob("src/**/*.{png,jpg,jpeg,gif,svg,webp,ico}")
   for (const file of imageFiles) {
     const outFile = file.replace("src/", "dist/")
+    // Create directory if it doesn't exist
+    const outDir = outFile.substring(0, outFile.lastIndexOf("/"))
+    await fs.mkdir(outDir, { recursive: true })
     await fs.copyFile(file, outFile)
     console.log(`Copied ${file} → ${outFile}`)
   }
