@@ -31,4 +31,4 @@ User-agent: Bytespider
 Disallow: /
 
 # Sitemap
-Sitemap: https://blog2026-1bm.pages.dev/sitemap.xml
+Sitemap: https://pooyam.dev/sitemap.xml

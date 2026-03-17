@@ -7,14 +7,41 @@
 <title>Photography - Py4_</title>
 <meta name="description" content="Photography portfolio by Pooya">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://blog2026-1bm.pages.dev/photography.html">
+<meta property="og:url" content="https://pooyam.dev/photography.html">
 <meta property="og:title" content="Photography - Py4_">
 <meta property="og:description" content="Photography portfolio by Pooya">
 <link rel="preload" as="image" href="photo.webp">
 <style>
+/* BROADSIDE NEWSPAPER PORTFOLIO */
+:root {
+    --broad-ink: #0d0d0d;
+    --broad-paper: #f7f6f2;
+    --broad-red: #e62e00;
+    --rule-heavy: 4px solid var(--broad-ink);
+    --rule-light: 1px solid var(--broad-ink);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+::selection { background: var(--broad-red); color: var(--broad-paper); }
+
+body {
+    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+    font-size:17px;
+    line-height:1.6;
+    color:#000;
+    background:#ffed00;
+    padding:0;
+    max-width:100vw;
+    overflow-x:clip;
+}
+
+.c{max-width:100%;margin:0 auto;padding:100px 0 120px}
+
+.scroll-progress{position:fixed;top:0;left:0;width:0%;height:6px;background:#000;z-index:200;transition:width .1s}
+
+/* Original Header Styles */
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:17px;line-height:1.6;color:#000;background:#F5F5F5;padding:0;max-width:100vw;overflow-x:clip}
-.c{max-width:1200px;margin:0 auto;padding:100px 40px 120px}
 .b{border:8px solid #000}
 .b6{border:6px solid #000}
 .b4{border:4px solid #000}
@@ -22,10 +49,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;f
 .b2{border:2px solid #000}
 .bb{border-bottom:8px solid #000}
 .bt{border-top:2px solid #000}
-.bg{background:#F5F5F5}
+.bg{background:#ffed00}
 .bgw{background:#fff}
 .bgb{background:#000}
-.bgg{background:#c4c4c4}
 .f9{font-weight:900}
 .f6{font-weight:600}
 .f5{font-weight:500}
@@ -37,8 +63,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;f
 .ib{display:inline-block}
 .db{display:block}
 .tr{transition:all .15s}
-header{margin-bottom:80px;padding-bottom:48px;padding-top:40px;position:sticky;top:0;background:#F5F5F5;z-index:100}
-.scroll-progress{position:fixed;top:0;left:0;width:0%;height:6px;background:#000;z-index:200;transition:width .1s}
+
+header{margin-bottom:80px;padding:40px 40px 48px;background:#ffed00;max-width:720px;margin-left:auto;margin-right:auto}
 h1{font-size:72px;font-weight:900;line-height:1;letter-spacing:-.05em;margin-bottom:20px;color:#000;display:flex;justify-content:space-between;align-items:center}
 h1 a{color:#000;text-decoration:none}
 .photo{height:72px}
@@ -49,47 +75,178 @@ nav{margin-top:36px;font-size:16px;display:flex;gap:8px}
 .btn{color:#000;text-decoration:none;padding:12px 20px;font-size:13px;letter-spacing:.05em}
 .btn:hover{background:#000;color:#ffed00}
 .btn-active{background:#000;color:#ffed00}
-footer{margin-top:120px;padding-top:32px;font-size:13px;color:#000;text-align:center}
+
+footer{margin-top:120px;padding:32px 40px 0;font-size:13px;color:#000;text-align:center;max-width:720px;margin-left:auto;margin-right:auto}
 footer a{color:#000;text-decoration:underline}
 footer a:hover{color:#666}
 .hacker-emblem{width:24px;height:24px;display:inline-block;vertical-align:middle;margin-left:8px}
-.portfolio{display:flex;flex-direction:column;gap:6rem}
-.row{display:grid;grid-template-columns:repeat(8,1fr);gap:0.75rem;align-items:start}
-.span-3{grid-column:span 3}
-.span-4{grid-column:span 4}
-.span-5{grid-column:span 5}
-.img-box{background:#c4c4c4;width:100%;display:block}
-.ar-landscape-wide:not(img){aspect-ratio:16/9}
-.ar-landscape:not(img){aspect-ratio:4/3}
-.ar-portrait:not(img){aspect-ratio:3/4}
-img.img-box{width:auto;height:auto;max-width:500px;max-height:450px;background:none;display:block}
-.row > div:first-child{display:flex;justify-content:flex-end}
-.text-col{position:relative;display:flex;flex-direction:column;justify-content:flex-end;height:100%}
-.text-col p{font-family:Impact,'Arial Black',sans-serif;font-size:2.5rem;font-weight:900;letter-spacing:-.5px;line-height:1.1;color:#000}
-.text-content{width:100%;max-width:300px}
-.marker{position:absolute;top:0;background:#ffed00;color:#000;padding:.6rem .25rem;font-size:.65rem;font-weight:bold;text-transform:uppercase;letter-spacing:1px;writing-mode:vertical-rl;transform:rotate(180deg);border:3px solid #000}
-.marker-left .marker{left:0}
-.marker-left .text-content{text-align:left;align-self:flex-start}
-.marker-right .marker{right:0}
-.marker-right .text-content{text-align:right;align-self:flex-end}
-@media(max-width:768px){
-.c{padding:60px 24px 80px}
-header{padding-bottom:32px;border-bottom:4px solid #000}
-h1{font-size:48px}
-.photo{height:48px}
-nav{overflow-x:auto;-webkit-overflow-scrolling:touch;flex-wrap:nowrap;scrollbar-width:none;-ms-overflow-style:none;margin-right:-24px}
-nav::-webkit-scrollbar{display:none}
-.btn{white-space:nowrap;flex-shrink:0}
-.portfolio{gap:4rem}
-.row{display:flex;flex-direction:column;gap:1.5rem}
-.row.text-first{flex-direction:column-reverse}
-.marker-left,.marker-right{padding:0}
-.marker{position:relative;display:inline-block;writing-mode:horizontal-tb;transform:none;padding:.2rem .6rem;margin-bottom:.8rem}
-}
 .old-links{font-size:11px;padding:8px 0;font-family:Verdana,sans-serif}
 .old-links a{color:#00f;text-decoration:underline}
 .old-links a:visited{color:#551a8b}
 .old-links a:hover{color:#f00}
+
+/* Broadside Portfolio Styles */
+.portfolio {
+    display: flex;
+    flex-direction: column;
+    padding: 6vw 4vw;
+    justify-content: center;
+}
+
+.portfolio-inner {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 6vw 4vw;
+    background: var(--broad-paper);
+    position: relative;
+    overflow: visible;
+}
+
+.band {
+    display: flex;
+    align-items: stretch;
+    border-bottom: var(--rule-heavy);
+    padding: 4vw 0;
+    gap: 2vw;
+    transition: background 0.3s;
+    overflow: visible;
+}
+
+.band:nth-child(even) {
+    flex-direction: row-reverse;
+}
+
+.band-meta {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    font-family: "Courier New", Courier, monospace;
+    font-size: 13px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--broad-ink);
+    display: flex;
+    justify-content: space-between;
+    border-left: var(--rule-light);
+    padding-left: 10px;
+    opacity: 0.6;
+    transition: opacity 0.3s;
+}
+
+.band:hover .band-meta {
+    opacity: 1;
+    color: var(--broad-red);
+    border-left-color: var(--broad-red);
+}
+
+.band-img-wrapper {
+    width: 65%;
+    flex-shrink: 0;
+    position: relative;
+    overflow: hidden;
+}
+
+img.img-box {
+    width: 100%;
+    height: auto;
+    display: block;
+    filter: contrast(105%) saturate(110%);
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.band:hover img.img-box {
+    transform: scale(1.03);
+}
+
+.band-text {
+    flex: 1 1 50%;
+    display: flex;
+    align-items: center;
+}
+
+.headline {
+    font-family: "Arial Black", "Helvetica Neue", sans-serif;
+    font-size: clamp(32px, 4.5vw, 100px);
+    font-weight: 900;
+    line-height: 0.95;
+    text-transform: uppercase;
+    letter-spacing: -0.03em;
+    color: var(--broad-ink);
+}
+
+.hl {
+    color: var(--broad-red);
+}
+
+.band.full-width {
+    flex-direction: column;
+    text-align: center;
+    border-bottom: none;
+}
+
+.band.full-width .band-meta {
+    writing-mode: horizontal-tb;
+    transform: none;
+    border-left: none;
+    border-bottom: var(--rule-light);
+    padding-left: 0;
+    padding-bottom: 10px;
+    margin-bottom: 2vw;
+    justify-content: center;
+    gap: 20px;
+}
+
+.band.full-width .band-img-wrapper {
+    width: 100%;
+    max-height: 70vh;
+    margin-bottom: 3vw;
+}
+
+.band.full-width .headline {
+    font-size: clamp(50px, 8vw, 160px);
+}
+
+@media (max-width: 900px) {
+    .c{padding:60px 0 80px}
+    header{padding:32px 24px;border-bottom:4px solid #000}
+    h1{font-size:48px}
+    .photo{height:48px}
+    nav{overflow-x:auto;-webkit-overflow-scrolling:touch;flex-wrap:nowrap;scrollbar-width:none;-ms-overflow-style:none;margin-right:-24px}
+    nav::-webkit-scrollbar{display:none}
+    .btn{white-space:nowrap;flex-shrink:0}
+
+    .portfolio {
+        padding: 8vw 24px;
+    }
+
+    .portfolio-inner {
+        padding: 6vw 24px;
+    }
+
+    header, footer {
+        padding-left: 24px;
+        padding-right: 24px;
+    }
+
+    .band, .band:nth-child(even) {
+        flex-direction: column;
+        padding: 8vw 0;
+        gap: 20px;
+    }
+    .band-meta {
+        writing-mode: horizontal-tb;
+        transform: none;
+        border-left: none;
+        padding-left: 0;
+        border-bottom: 1px solid #ccc;
+        padding-bottom: 10px;
+        flex-direction: row;
+    }
+    .band-img-wrapper { width: 100%; }
+    .band-text { padding-top: 10px; }
+    .headline { font-size: clamp(36px, 10vw, 60px); }
+}
 </style>
 </head>
 <body>
@@ -106,85 +263,104 @@ nav::-webkit-scrollbar{display:none}
 <a href="photography.html" class="btn btn-active ss f9 tu bgb b3 tr">Photography</a>
 </nav>
 </header>
+
 <main class="portfolio">
-<article class="row">
-<div class="span-3">
-<img src="assets/20250601-DSCF0250.jpg" class="img-box ar-portrait">
+<div class="portfolio-inner">
+
+<article class="band">
+<div class="band-meta">
+<span>Vancouver, Canada</span>
+<span>Jun 03, 2025</span>
 </div>
-<div class="span-5 text-col marker-left">
-<div class="marker b3">2025-06-03</div>
-<div class="text-content">
-<p>Where the everyday surrenders to a playful moment, joy reveals the hidden meaning of life.</p>
+<div class="band-img-wrapper">
+<img class="img-box" src="assets/20250601-DSCF0250.jpg" alt="Philosophy">
 </div>
-</div>
-</article>
-<article class="row text-first">
-<div class="span-3 text-col marker-right">
-<div class="marker b3">2026-01-24</div>
-<div class="text-content">
-<p>I followed my heart and it led me to tacos.</p>
-</div>
-</div>
-<div class="span-5">
-<img src="assets/20260124-DSCF5142-2.jpg"class="img-box ar-landscape-wide">
+<div class="band-text">
+<h2 class="headline">Where the everyday surrenders to a playful moment, <span class="hl">joy reveals the hidden meaning</span> of life.</h2>
 </div>
 </article>
-<article class="row">
-<div class="span-4">
-<img src="assets/20260221-DSCF5482.jpg" class="img-box ar-landscape">
+
+<article class="band">
+<div class="band-meta">
+<span>New York City, USA</span>
+<span>Jan 24, 2026</span>
 </div>
-<div class="span-4 text-col marker-left">
-<div class="marker b3">2026-02-21</div>
-<div class="text-content">
-<p>Even in the middle of winter, you can find a little pocket of sunshine.</p>
+<div class="band-img-wrapper">
+<img class="img-box" src="assets/20260124-DSCF5142-2.jpg" alt="Trajectory">
 </div>
-</div>
-</article>
-<article class="row text-first">
-<div class="span-4 text-col marker-right">
-<div class="marker b3">2025-10-04</div>
-<div class="text-content">
-<p>Chelsea - Liverpool post match at the birth place of Chelsea FC.</p>
-</div>
-</div>
-<div class="span-4">
-<img src="assets/20251004-DSCF3677.jpg" class="img-box ar-landscape">
+<div class="band-text">
+<h2 class="headline">I followed my heart and it <span class="hl">led me to tacos.</span></h2>
 </div>
 </article>
-<article class="row">
-<div class="span-5">
-<img src="assets/20250809-DSCF1724.jpg" class="img-box ar-landscape-wide">
+
+<article class="band">
+<div class="band-meta">
+<span>San Francisco, USA</span>
+<span>Feb 21, 2026</span>
 </div>
-<div class="span-3 text-col marker-left">
-<div class="marker b3">2025-08-09</div>
-<div class="text-content">
-<p>How many summers live in this river?</p>
+<div class="band-img-wrapper">
+<img class="img-box" src="assets/20260221-DSCF5482.jpg" alt="Climate">
 </div>
-</div>
-</article>
-<article class="row text-first">
-<div class="span-5 text-col marker-right">
-<div class="marker b3">2025-06-22</div>
-<div class="text-content">
-<p>Sugar, smiles and squad.</p>
-</div>
-</div>
-<div class="span-3">
-<img src="assets/20250622-DSCF0788.jpg" class="img-box ar-portrait">
+<div class="band-text">
+<h2 class="headline">Even in the middle of winter, you can find a <span class="hl">pocket of sunshine.</span></h2>
 </div>
 </article>
-<article class="row">
-<div class="span-4">
-<img src="assets/20250601-DSCF0141.jpg" class="img-box ar-landscape">
+
+<article class="band">
+<div class="band-meta">
+<span>London, UK</span>
+<span>Oct 04, 2025</span>
 </div>
-<div class="span-4 text-col marker-left">
-<div class="marker b3">2025-06-01</div>
-<div class="text-content">
-<p>Silent precision.</p>
+<div class="band-img-wrapper">
+<img class="img-box" src="assets/20251004-DSCF3677.jpg" alt="Heritage">
 </div>
+<div class="band-text">
+<h2 class="headline">Chelsea - Liverpool post match at the <span class="hl">birth place of Chelsea FC.</span></h2>
 </div>
 </article>
+
+<article class="band">
+<div class="band-meta">
+<span>Vancouver, Canada</span>
+<span>Aug 09, 2025</span>
+</div>
+<div class="band-img-wrapper">
+<img class="img-box" src="assets/20250809-DSCF1724.jpg" alt="Nature">
+</div>
+<div class="band-text">
+<h2 class="headline">How many summers <span class="hl">live in this river?</span></h2>
+</div>
+</article>
+
+<article class="band">
+<div class="band-meta">
+<span>Vancouver, Canada</span>
+<span>Jun 22, 2025</span>
+</div>
+<div class="band-img-wrapper">
+<img class="img-box" src="assets/20250622-DSCF0788.jpg" alt="Society">
+</div>
+<div class="band-text">
+<h2 class="headline"><span class="hl">Sugar, smiles</span> and squad.</h2>
+</div>
+</article>
+
+<article class="band full-width">
+<div class="band-meta">
+<span>Vancouver, Canada</span>
+<span>Jun 01, 2025</span>
+</div>
+<div class="band-img-wrapper">
+<img class="img-box" src="assets/20250601-DSCF0141.jpg" alt="Form">
+</div>
+<div class="band-text">
+<h2 class="headline">SILENT <span class="hl">PRECISION.</span></h2>
+</div>
+</article>
+
+</div>
 </main>
+
 <footer class="vd f6 bt">
 <p>Keeping it under <a href="https://endtimes.dev/why-your-website-should-be-under-14kb-in-size/" target="_blank">14kb</a></p>
 <div class="old-links">
