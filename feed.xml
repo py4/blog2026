@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Py4_ - A lens into the entropy of being</title>
+    <link>https://pooyam.dev/</link>
+    <description>Personal blog about software engineering, life, and deep thoughts. Writing from Tehran to Canada.</description>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 17 Mar 2026 00:00:00 GMT</lastBuildDate>
+    <atom:link href="https://pooyam.dev/feed.xml" rel="self" type="application/rss+xml"/>
+
+    <item>
+      <title>Protein Math and Not Dying</title>
+      <link>https://pooyam.dev/nutrition-performance-health.html</link>
+      <guid>https://pooyam.dev/nutrition-performance-health.html</guid>
+      <pubDate>Sun, 16 Mar 2026 00:00:00 GMT</pubDate>
+      <description>Personal notes on hitting protein targets, high-efficiency protein sources, cruciferous vegetables, and fiber. Maintenance vs bulk, the 80/20 rule, and broccoli sprouts.</description>
+    </item>
+
+    <item>
+      <title>Browser Sessions Are All-or-Nothing</title>
+      <link>https://pooyam.dev/browser-sessions-all-or-nothing.html</link>
+      <guid>https://pooyam.dev/browser-sessions-all-or-nothing.html</guid>
+      <pubDate>Sat, 15 Mar 2026 00:00:00 GMT</pubDate>
+      <description>Web sessions assume a human is in control. But when AI agents take over your browser, you're either logged in with full permissions or not. We need selective authorization—read-only modes, proof-of-human-intent, and agent-aware backends.</description>
+    </item>
+
+  </channel>
+</rss>

@@ -56,8 +56,8 @@ async function build() {
     console.log(`  → ${outFile} (${minified.length} bytes)`)
   }
 
-  // Copy other files (robots.txt, sitemap.xml, _headers)
-  const otherFiles = ["robots.txt", "sitemap.xml", "_headers"]
+  // Copy other files (robots.txt, sitemap.xml, _headers, feed.xml)
+  const otherFiles = ["robots.txt", "sitemap.xml", "_headers", "feed.xml"]
   for (const file of otherFiles) {
     try {
       await fs.copyFile(file, `dist/${file}`)
