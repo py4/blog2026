@@ -9,6 +9,14 @@
     <atom:link href="https://pooyam.dev/feed.xml" rel="self" type="application/rss+xml"/>
 
     <item>
+      <title>I Miss Coding</title>
+      <link>https://pooyam.dev/i-miss-coding.html</link>
+      <guid>https://pooyam.dev/i-miss-coding.html</guid>
+      <pubDate>Tue, 17 Mar 2026 00:00:00 GMT</pubDate>
+      <description>Coding agents have transformed my work at Google. But even if I keep my job, I don't enjoy this new role. I used to love figuring out the 'how.' Now the agent does it, and doing it myself is just inefficient.</description>
+    </item>
+
+    <item>
       <title>Protein Math and Not Dying</title>
       <link>https://pooyam.dev/nutrition-performance-health.html</link>
       <guid>https://pooyam.dev/nutrition-performance-health.html</guid>
