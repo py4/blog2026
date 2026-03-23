@@ -5,8 +5,16 @@
     <link>https://pooyam.dev/</link>
     <description>Personal blog about software engineering, life, and deep thoughts. Writing from Tehran to Canada.</description>
     <language>en-us</language>
-    <lastBuildDate>Mon, 17 Mar 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Mon, 23 Mar 2026 00:00:00 GMT</lastBuildDate>
     <atom:link href="https://pooyam.dev/feed.xml" rel="self" type="application/rss+xml"/>
+
+    <item>
+      <title>LLMs Can Design Systems. The Problem Is You.</title>
+      <link>https://pooyam.dev/llms-system-design.html</link>
+      <guid>https://pooyam.dev/llms-system-design.html</guid>
+      <pubDate>Mon, 23 Mar 2026 00:00:00 GMT</pubDate>
+      <description>People say LLMs can code but can't do system design. I disagree. System design is more pattern-matching than people admit — and if you give an LLM enough context, it can outdesign 99% of engineers.</description>
+    </item>
 
     <item>
       <title>I Miss Coding</title>
@@ -14,14 +22,6 @@
       <guid>https://pooyam.dev/i-miss-coding.html</guid>
       <pubDate>Tue, 17 Mar 2026 00:00:00 GMT</pubDate>
       <description>Coding agents have transformed my work at Google. But even if I keep my job, I don't enjoy this new role. I used to love figuring out the 'how.' Now the agent does it, and doing it myself is just inefficient.</description>
-    </item>
-
-    <item>
-      <title>Protein Math and Not Dying</title>
-      <link>https://pooyam.dev/nutrition-performance-health.html</link>
-      <guid>https://pooyam.dev/nutrition-performance-health.html</guid>
-      <pubDate>Sun, 16 Mar 2026 00:00:00 GMT</pubDate>
-      <description>Personal notes on hitting protein targets, high-efficiency protein sources, cruciferous vegetables, and fiber. Maintenance vs bulk, the 80/20 rule, and broccoli sprouts.</description>
     </item>
 
     <item>
