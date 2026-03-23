@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noai, noimageai">
+<title>LLMs Can Design Systems. The Problem Is You. - Py4_</title>
+<meta name="description" content="People say LLMs can code but can't do system design. I disagree. System design is more pattern-matching than people admit — and if you give an LLM enough context, it can outdesign 99% of engineers.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://pooyam.dev/llms-system-design.html">
+<meta property="og:title" content="LLMs Can Design Systems. The Problem Is You.">
+<meta property="og:description" content="People say LLMs can code but can't do system design. I disagree. System design is more pattern-matching than people admit — and if you give an LLM enough context, it can outdesign 99% of engineers.">
+<link rel="preload" as="image" href="photo.webp">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Georgia,serif;font-size:17px;line-height:1.7;color:#000;background:#ffed00;padding:0;max-width:100vw;overflow-x:clip}
+.c{max-width:720px;margin:0 auto;padding:100px 40px 120px}
+.b{border:8px solid #000}
+.b6{border:6px solid #000}
+.b4{border:4px solid #000}
+.b3{border:3px solid #000}
+.b2{border:2px solid #000}
+.bb{border-bottom:8px solid #000}
+.bb4{border-bottom:4px solid #000}
+.bt{border-top:2px solid #000}
+.bl{border-left:12px solid #ffed00}
+.bg{background:#ffed00}
+.bgw{background:#fff}
+.bgb{background:#000}
+.bgg{background:#f5f5f5}
+.f9{font-weight:900}
+.f6{font-weight:600}
+.f5{font-weight:500}
+.tu{text-transform:uppercase}
+.im{font-family:Impact,'Arial Black',sans-serif}
+.vd{font-family:Verdana,Geneva,sans-serif}
+.ge{font-family:Georgia,serif}
+.mn{font-family:ui-monospace,'SF Mono',Menlo,monospace}
+.ss{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif}
+.ib{display:inline-block}
+.db{display:block}
+.tr{transition:all .15s}
+header{margin-bottom:36px;padding-bottom:0;padding-top:40px;position:relative;background:#ffed00}
+.scroll-progress{position:fixed;top:0;left:0;width:0%;height:6px;background:#000;z-index:200;transition:width .1s}
+h1{font-size:72px;font-weight:900;line-height:1;letter-spacing:-.05em;margin-bottom:20px;color:#000;display:flex;justify-content:space-between;align-items:center}
+h1 a{color:#000;text-decoration:none}
+.photo{height:72px}
+.tg{font-size:19px}
+.cur{width:10px;height:19px;margin-left:4px;animation:bk 1s infinite}
+@keyframes bk{0%,49%{opacity:1}50%,100%{opacity:0}}
+nav{margin-top:0;margin-bottom:80px;font-size:16px;display:flex;gap:8px;position:sticky;top:0;background:#ffed00;padding:24px 40px 48px 40px;margin-left:-40px;margin-right:-40px;z-index:100}
+nav::after{content:'';position:absolute;bottom:0;left:40px;right:40px;height:8px;background:#000}
+.btn{color:#000;text-decoration:none;padding:12px 20px;font-size:13px;letter-spacing:.05em}
+.btn:hover{background:#000;color:#ffed00}
+.btn-active{background:#000;color:#ffed00}
+.art{margin-bottom:80px;padding:64px}
+.art h1{font-size:64px;line-height:1.05;margin-bottom:28px;letter-spacing:.02em;padding-bottom:28px}
+.pm{font-size:13px;margin-bottom:56px;letter-spacing:.12em;padding:8px 16px}
+.ct h2{font-size:44px;margin-top:72px;margin-bottom:32px;letter-spacing:.02em;padding:20px 24px}
+.ct h3{font-size:30px;margin-top:56px;margin-bottom:24px;letter-spacing:.02em;padding-bottom:12px}
+.ct p{margin-bottom:28px}
+.ct a{color:#00f;text-decoration:underline}
+.ct a:visited{color:#551a8b}
+.ct a:hover{color:#f00}
+.ct code{font-size:15px;background:#f5f5f5;color:#000;padding:2px 6px;border:1px solid #ccc}
+.ct pre{font-size:14px;color:#ffed00;padding:36px;overflow-x:auto;margin:48px 0;line-height:1.6}
+.ct pre code{background:none;padding:0;color:#ffed00;font-weight:600;border:none}
+.ct ul,.ct ol{margin-bottom:28px;padding-left:32px}
+.ct li{margin-bottom:14px;padding-left:8px}
+.ct li::marker{color:#000;font-weight:900}
+.ct blockquote{padding:32px 40px;margin:56px 0}
+.ct blockquote p{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;margin-bottom:0;font-size:20px;line-height:1.5;font-weight:600}
+.ct hr{border:none;height:6px;margin:80px 0}
+.ct em{font-style:italic}
+.ct strong{font-weight:900}
+footer{margin-top:120px;padding-top:32px;font-size:13px;color:#000;text-align:center}
+footer a{color:#000;text-decoration:underline}
+footer a:hover{color:#666}
+.hacker-emblem{width:24px;height:24px;display:inline-block;vertical-align:middle;margin-left:8px}
+.old-links{font-size:11px;padding:8px 0;font-family:Verdana,sans-serif}
+.old-links a{color:#00f;text-decoration:underline}
+.old-links a:visited{color:#551a8b}
+.old-links a:hover{color:#f00}
+@media(max-width:768px){
+.c{padding:60px 24px 100px}
+header{padding-bottom:0;margin-bottom:36px}
+h1{font-size:48px}
+.photo{height:48px}
+nav{overflow-x:auto;-webkit-overflow-scrolling:touch;flex-wrap:nowrap;scrollbar-width:none;-ms-overflow-style:none;margin-left:-24px;margin-right:-24px;padding:20px 24px 32px 24px;margin-bottom:80px}
+nav::-webkit-scrollbar{display:none}
+nav::after{left:24px;right:24px;height:4px}
+.btn{white-space:nowrap;flex-shrink:0}
+.art{padding:40px 28px;border:4px solid #000}
+.art h1{font-size:42px;border-bottom:6px solid #000;padding-bottom:20px}
+.ct h2{font-size:34px;padding:16px 20px;border:4px solid #000}
+.ct h3{font-size:26px}
+}
+</style>
+</head>
+<body>
+<div class="scroll-progress"></div>
+<div class="c">
+<header>
+<h1 class="ge tu"><a href="index.html">Py4_</a><img src="photo.webp" alt="Profile photo" class="photo"></h1>
+<p class="tg vd f5">A lens into the entropy of being<span class="cur ib bgb"></span></p>
+</header>
+<nav>
+<a href="index.html" class="btn ss f9 tu bg b3 tr">Home</a>
+<a href="about.html" class="btn ss f9 tu bg b3 tr">About</a>
+<a href="contact.html" class="btn ss f9 tu bg b3 tr">Contact</a>
+<a href="places.html" class="btn ss f9 tu bg b3 tr">Places</a>
+<a href="now.html" class="btn ss f9 tu bg b3 tr">Now</a>
+<a href="photography.html" class="btn ss f9 tu bg b3 tr">Photography</a>
+</nav>
+<article class="art bgw b">
+<h1 class="im tu bb">LLMs Can Design Systems. The Problem Is You.</h1>
+<div class="pm im f9 tu bg b3 ib">March 23, 2026</div>
+<div class="ct">
+<p>Over the past year, as coding agents have rapidly evolved, I've had countless conversations with friends and colleagues debating whether they'll eventually replace software engineers. One argument I kept hearing went something like: "Sure, it can write clean, working code&mdash;but system design? That's a different story."</p>
+
+<p>There's a near-reverent respect for "system design" in tech circles, especially at FAANG companies. But that argument never persuaded me, and I've spent a lot of time trying to figure out why people hold it.</p>
+
+<p>Here's my experience: whenever I prepare for tech interviews, system design has always felt considerably easier than grinding LeetCode. The scope is narrower. You're working with a well-known toolkit&mdash;caching, message queues, horizontal scaling, sharding, load balancers&mdash;and the problems tend to rhyme with each other. LeetCode, by contrast, has a vast and varied problem space where you can always get caught off guard. System design is more of a pattern-matching exercise than people like to admit.</p>
+
+<p>So if system design is this formulaic, why do so many people believe it's the weak spot for LLMs? My hypothesis: it's a context problem, not a model problem. Engineers typically work inside large, sprawling systems. When they hand a design task to an LLM without explaining where the new component fits&mdash;the existing architecture, the constraints, the traffic patterns, the team's operational limits&mdash;they're setting it up to fail. That's poor context management on the user's side, not a fundamental limitation of the model.</p>
+
+<p>I can speak from personal experience. Since December, I've been working on a new LLM training project with significant distributed systems design involved. I've been using AI throughout, and it's been genuinely impressive&mdash;not just at the implementation level, but at the architectural level too. Given the right context, it reasons through trade-offs, catches edge cases, and proposes designs I might not have reached on my own.</p>
+
+<p>Granted, it sometimes misses a constraint or overlooks something important&mdash;but when I trace it back, it's almost always because I didn't specify it clearly enough. (You could argue that identifying and articulating those constraints is precisely what software engineering <em>is</em>, and I'll give you that.) Still, assuming sufficient context, I'd argue an LLM can design better systems than 99% of engineers.</p>
+</div>
+</article>
+<footer class="vd f6 bt">
+<p>Keeping it under <a href="https://endtimes.dev/why-your-website-should-be-under-14kb-in-size/" target="_blank">14kb</a></p>
+<div class="old-links">
+<a href="http://www.catb.org/hacker-emblem/" target="_blank"><img src="glider.png" alt="hacker emblem" class="hacker-emblem"></a> |
+<a href="https://huggingface.co/collections/meta-llama/llama-31" target="_blank" title="Llama models"><span style="font-size:20px">🦙</span></a> |
+<a href="resume.pdf" target="_blank">Resume</a> |
+<a href="https://www.linkedin.com/in/pooyamoradi/" target="_blank">LinkedIn</a> |
+<a href="https://scholar.google.ca/citations?user=JHVXuZkAAAAJ&hl=en" target="_blank">Scholar</a> |
+<a href="https://www.goodreads.com/py4_" target="_blank">Goodreads</a> |
+<a href="https://10kb.club/" target="_blank">10kb Club</a> |
+<a href="https://indieweb.org/" target="_blank">IndieWeb</a> |
+<a href="https://github.com/kagisearch/smallweb" target="_blank"><img src="assets/small_web.png" alt="Small Web" style="height:24px;vertical-align:middle"></a> |
+<a href="feed.xml" target="_blank"><img src="assets/rss.png" alt="RSS Feed" style="height:24px;vertical-align:middle"></a>
+</div>
+<div style="text-align:center;margin-top:16px">
+<img src="e1.png" alt="">
+<div style="display:inline-block;margin-left:20px;vertical-align:middle">
+<svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+<circle cx="30" cy="30" r="28" fill="#f00" stroke="#000" stroke-width="3"/>
+<text x="30" y="38" font-family="Impact,sans-serif" font-size="20" font-weight="900" fill="#000" text-anchor="middle">AI</text>
+<line x1="10" y1="10" x2="50" y2="50" stroke="#000" stroke-width="5"/>
+</svg>
+</div>
+</div>
+</footer>
+</div>
+<script>
+window.addEventListener('scroll',()=>{
+const h=document.documentElement.scrollHeight-window.innerHeight;
+const p=(window.scrollY/h)*100;
+document.querySelector('.scroll-progress').style.width=p+'%';
+});
+</script>
+</body>
+</html>
