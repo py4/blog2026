@@ -1,0 +1,63 @@
+from collections.abc import Iterable
+import operator
+
+
+def sum_of_squares_of_even_numbers(numbers: Iterable[object]) -> int:
+    """Return the sum of squares of even integers in ``numbers``.
+
+    Args:
+        numbers: An iterable of integer values.
+
+    Returns:
+        The sum of n * n for each even integer in ``numbers``.
+
+    Raises:
+        TypeError: If ``numbers`` is not iterable or contains a non-integer item.
+    """
+    if isinstance(numbers, (str, bytes)):
+        raise TypeError("numbers must be an iterable of integers, not a string-like object")
+
+    try:
+        iterator = iter(numbers)
+    except TypeError as exc:
+        raise TypeError("numbers must be an iterable of integers") from exc
+
+    total = 0
+    for index, item in enumerate(iterator):
+        if isinstance(item, bool):
+            raise TypeError(f"numbers[{index}] must be an integer, got bool")
+
+        try:
+            number = operator.index(item)
+        except TypeError as exc:
+            raise TypeError(
+                f"numbers[{index}] must be an integer, got {type(item).__name__}: {item!r}"
+            ) from exc
+
+        if number % 2 == 0:
+            total += number * number
+
+    return total
+
+
+# Tests
+
+import pytest
+
+
+def test_returns_sum_of_squares_of_even_numbers():
+    assert sum_of_squares_of_even_numbers([1, 2, 3, 4, 6]) == 56
+
+
+def test_returns_zero_for_empty_input():
+    assert sum_of_squares_of_even_numbers([]) == 0
+
+
+def test_rejects_bool_values():
+    with pytest.raises(TypeError, match=r"numbers\[1\] must be an integer, got bool"):
+        sum_of_squares_of_even_numbers([2, True, 4])
+
+
+def test_rejects_non_integer_values_with_index():
+    with pytest.raises(TypeError, match=r"numbers\[2\] must be an integer"):
+        sum_of_squares_of_even_numbers([2, 4, 3.5])

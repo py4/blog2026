@@ -1,0 +1,139 @@
+from __future__ import annotations
+
+from typing import Final, TypeGuard, cast
+
+__all__ = [
+    "InvalidNumbersError",
+    "InvalidNumbersContainerError",
+    "InvalidNumbersItemError",
+    "sum_of_squares_of_even_numbers",
+]
+
+_CONTAINER_ERROR_PREFIX: Final[str] = (
+    "numbers must be a built-in list of built-in integers"
+)
+
+
+class InvalidNumbersError(TypeError):
+    """Base class for validation errors raised by this module."""
+
+
+class InvalidNumbersContainerError(InvalidNumbersError):
+    """Raised when the top-level ``numbers`` argument is invalid."""
+
+    __slots__ = ("value",)
+
+    def __init__(self, value: object) -> None:
+        self.value = value
+
+        if value is None:
+            message = "numbers cannot be None"
+        else:
+            message = f"{_CONTAINER_ERROR_PREFIX}; got {type(value).__name__}"
+
+        super().__init__(message)
+
+
+class InvalidNumbersItemError(InvalidNumbersError):
+    """Raised when an element in ``numbers`` is invalid."""
+
+    __slots__ = ("index", "value")
+
+    def __init__(self, *, index: int, value: object) -> None:
+        self.index = index
+        self.value = value
+
+        super().__init__(
+            f"numbers[{index}] must be a built-in int, "
+            f"got {type(value).__name__}: {value!r}"
+        )
+
+
+def sum_of_squares_of_even_numbers(numbers: list[int]) -> int:
+    """Return the sum of squared even integers in ``numbers``.
+
+    The public contract is intentionally strict: the argument must be a built-in
+    ``list`` containing only built-in ``int`` values. ``bool``, integer
+    subclasses, and list subclasses are rejected intentionally.
+
+    Args:
+        numbers: A built-in list of built-in integers.
+
+    Returns:
+        The sum of ``n * n`` for each even integer in ``numbers``.
+
+    Raises:
+        InvalidNumbersContainerError: If ``numbers`` is not a built-in ``list``.
+        InvalidNumbersItemError: If any element is not a built-in ``int``.
+    """
+    validated_numbers = _require_builtin_list(numbers)
+    return _sum_validated_even_squares(validated_numbers)
+
+
+def _require_builtin_list(value: object) -> list[object]:
+    """Return ``value`` as a built-in list or raise a validation error."""
+    if value is None or type(value) is not list:
+        raise InvalidNumbersContainerError(value)
+
+    return cast(list[object], value)
+
+
+def _sum_validated_even_squares(numbers: list[object]) -> int:
+    """Validate items and compute the result in a single pass."""
+    total = 0
+
+    for index, value in enumerate(numbers):
+        if not _is_builtin_int(value):
+            raise InvalidNumbersItemError(index=index, value=value)
+
+        if value % 2 == 0:
+            total += value * value
+
+    return total
+
+
+def _is_builtin_int(value: object) -> TypeGuard[int]:
+    """Return ``True`` only for built-in ``int`` values."""
+    return type(value) is int
+
+
+# Tests
+
+import pytest
+
+
+class CustomList(list[int]):
+    pass
+
+
+class CustomInt(int):
+    pass
+
+
+def test_sum_of_squares_of_even_numbers_happy_path():
+    assert sum_of_squares_of_even_numbers([1, 2, 3, 4, 6]) == 56
+
+
+def test_sum_of_squares_of_even_numbers_empty_list():
+    assert sum_of_squares_of_even_numbers([]) == 0
+
+
+def test_sum_of_squares_of_even_numbers_rejects_list_subclass():
+    with pytest.raises(InvalidNumbersContainerError):
+        sum_of_squares_of_even_numbers(CustomList([2, 4]))  # type: ignore[arg-type]
+
+
+def test_sum_of_squares_of_even_numbers_rejects_int_subclass():
+    with pytest.raises(InvalidNumbersItemError) as exc_info:
+        sum_of_squares_of_even_numbers([CustomInt(2)])  # type: ignore[list-item]
+
+    assert exc_info.value.index == 0
+    assert isinstance(exc_info.value.value, CustomInt)
+
+
+def test_sum_of_squares_of_even_numbers_rejects_bool():
+    with pytest.raises(InvalidNumbersItemError) as exc_info:
+        sum_of_squares_of_even_numbers([2, True, 4])
+
+    assert exc_info.value.index == 1
+    assert exc_info.value.value is True

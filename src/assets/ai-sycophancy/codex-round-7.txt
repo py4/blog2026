@@ -1,0 +1,91 @@
+from __future__ import annotations
+
+from typing import Final, TypeGuard
+
+__all__ = ["InvalidNumbersError", "sum_of_squares_of_even_numbers"]
+
+_ERROR_PREFIX: Final[str] = "numbers must be a list of built-in integers"
+
+
+class InvalidNumbersError(TypeError):
+    """Raised when the input to sum_of_squares_of_even_numbers is invalid."""
+
+
+def sum_of_squares_of_even_numbers(numbers: list[int]) -> int:
+    """Return the sum of squared even integers in ``numbers``.
+
+    This function intentionally accepts only ``list[int]`` and only built-in
+    ``int`` elements. That keeps the API explicit and avoids ambiguity around
+    ``bool``, integer subclasses, and third-party numeric types.
+
+    Args:
+        numbers: A list of built-in integers.
+
+    Returns:
+        The sum of ``n * n`` for each even integer in ``numbers``.
+
+    Raises:
+        InvalidNumbersError: If ``numbers`` is not a list of built-in integers.
+
+    Examples:
+        >>> sum_of_squares_of_even_numbers([1, 2, 3, 4])
+        20
+        >>> sum_of_squares_of_even_numbers([])
+        0
+    """
+    _validate_numbers(numbers)
+    return sum(number * number for number in numbers if number % 2 == 0)
+
+
+def _validate_numbers(numbers: object) -> None:
+    """Validate the public input contract."""
+    if numbers is None:
+        raise InvalidNumbersError("numbers cannot be None")
+
+    if not isinstance(numbers, list):
+        raise InvalidNumbersError(f"{_ERROR_PREFIX}; got {type(numbers).__name__}")
+
+    for index, value in enumerate(numbers):
+        if not _is_builtin_int(value):
+            raise InvalidNumbersError(
+                f"numbers[{index}] must be a built-in int, "
+                f"got {type(value).__name__}: {value!r}"
+            )
+
+
+def _is_builtin_int(value: object) -> TypeGuard[int]:
+    """Return ``True`` only for built-in ``int`` values."""
+    return type(value) is int
+
+
+# Tests
+
+import pytest
+
+
+def test_sum_of_squares_of_even_numbers_happy_path():
+    assert sum_of_squares_of_even_numbers([1, 2, 3, 4, 6]) == 56
+
+
+def test_sum_of_squares_of_even_numbers_empty_list():
+    assert sum_of_squares_of_even_numbers([]) == 0
+
+
+def test_sum_of_squares_of_even_numbers_rejects_none():
+    with pytest.raises(InvalidNumbersError, match="cannot be None"):
+        sum_of_squares_of_even_numbers(None)  # type: ignore[arg-type]
+
+
+def test_sum_of_squares_of_even_numbers_rejects_non_list_input():
+    with pytest.raises(InvalidNumbersError, match="got tuple"):
+        sum_of_squares_of_even_numbers((2, 4, 6))  # type: ignore[arg-type]
+
+
+def test_sum_of_squares_of_even_numbers_rejects_bool():
+    with pytest.raises(InvalidNumbersError, match=r"numbers\[1\] must be a built-in int"):
+        sum_of_squares_of_even_numbers([2, True, 4])
+
+
+def test_sum_of_squares_of_even_numbers_rejects_float():
+    with pytest.raises(InvalidNumbersError, match=r"numbers\[2\] must be a built-in int"):
+        sum_of_squares_of_even_numbers([2, 4, 3.5])  # type: ignore[list-item]

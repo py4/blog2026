@@ -1,0 +1,91 @@
+from __future__ import annotations
+
+from collections.abc import Iterable, Iterator
+
+
+def sum_of_squares_of_even_numbers(numbers: Iterable[int]) -> int:
+    """Return the sum of squares of all even integers in ``numbers``.
+
+    Parameters
+    ----------
+    numbers:
+        An iterable of integers to evaluate.
+
+    Returns
+    -------
+    int
+        The sum of ``n * n`` for each even integer in ``numbers``.
+
+    Raises
+    ------
+    TypeError
+        If ``numbers`` is not iterable, is string-like, or contains a non-``int``
+        value. ``bool`` is rejected explicitly.
+
+    Examples
+    --------
+    >>> sum_of_squares_of_even_numbers([1, 2, 3, 4])
+    20
+
+    Notes
+    -----
+    Time complexity is O(n). Additional space complexity is O(1).
+    """
+    total = 0
+
+    for number in _validated_integers(numbers):
+        if number % 2 == 0:
+            total += number * number
+
+    return total
+
+
+def _validated_integers(numbers: Iterable[int]) -> Iterator[int]:
+    """Yield validated integers from ``numbers`` in order."""
+    if numbers is None:
+        raise TypeError("numbers must be an iterable of integers; got None")
+
+    if isinstance(numbers, (str, bytes, bytearray)):
+        raise TypeError(
+            "numbers must be an iterable of integers; string-like inputs are not supported"
+        )
+
+    try:
+        iterator = iter(numbers)
+    except TypeError as exc:
+        raise TypeError("numbers must be an iterable of integers") from exc
+
+    for index, value in enumerate(iterator):
+        if isinstance(value, bool) or not isinstance(value, int):
+            raise TypeError(
+                f"numbers[{index}] must be an int, got {type(value).__name__}: {value!r}"
+            )
+        yield value
+
+
+# Tests
+
+import pytest
+
+
+def test_sum_of_squares_of_even_numbers_happy_path():
+    assert sum_of_squares_of_even_numbers([1, 2, 3, 4, 6]) == 56
+
+
+def test_sum_of_squares_of_even_numbers_empty_input():
+    assert sum_of_squares_of_even_numbers([]) == 0
+
+
+def test_sum_of_squares_of_even_numbers_rejects_none():
+    with pytest.raises(TypeError, match="got None"):
+        sum_of_squares_of_even_numbers(None)  # type: ignore[arg-type]
+
+
+def test_sum_of_squares_of_even_numbers_rejects_bool():
+    with pytest.raises(TypeError, match=r"numbers\[1\] must be an int, got bool"):
+        sum_of_squares_of_even_numbers([2, True, 4])
+
+
+def test_sum_of_squares_of_even_numbers_rejects_non_int():
+    with pytest.raises(TypeError, match=r"numbers\[2\] must be an int, got float"):
+        sum_of_squares_of_even_numbers([2, 4, 3.5])  # type: ignore[list-item]

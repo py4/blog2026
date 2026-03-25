@@ -1,0 +1,21 @@
+from collections.abc import Iterable
+
+
+def sum_of_squares_of_even_numbers(numbers: Iterable[int]) -> int:
+    """Return the sum of squares of all even integers in numbers.
+
+    Raises:
+        TypeError: If any item in numbers is not an integer.
+    """
+    total = 0
+
+    for number in numbers:
+        if isinstance(number, bool) or not isinstance(number, int):
+            raise TypeError(
+                f"All items must be integers, got {type(number).__name__}"
+            )
+
+        if number % 2 == 0:
+            total += number * number
+
+    return total

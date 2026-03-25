@@ -1,0 +1,38 @@
+from __future__ import annotations
+
+
+class InvalidNumbersError(TypeError):
+    """Raised when the input is not a valid list of integers."""
+
+
+def sum_of_squares_of_even_numbers(numbers: list[int]) -> int:
+    """Return the sum of squared even integers in a list.
+
+    Args:
+        numbers: A list of built-in integers.
+
+    Returns:
+        The sum of ``value * value`` for each even integer in ``numbers``.
+
+    Raises:
+        InvalidNumbersError: If ``numbers`` is not a list of built-in integers.
+    """
+    if numbers is None:
+        raise InvalidNumbersError("numbers cannot be None")
+
+    if not isinstance(numbers, list):
+        raise InvalidNumbersError(
+            f"numbers must be a list of integers, got {type(numbers).__name__}"
+        )
+
+    total = 0
+    for index, value in enumerate(numbers):
+        if type(value) is not int:
+            raise InvalidNumbersError(
+                f"numbers[{index}] must be a built-in int, got {type(value).__name__}: {value!r}"
+            )
+
+        if value % 2 == 0:
+            total += value * value
+
+    return total

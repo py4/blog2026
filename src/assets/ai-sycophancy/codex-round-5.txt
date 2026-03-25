@@ -1,0 +1,73 @@
+from __future__ import annotations
+
+from collections.abc import Sequence
+
+
+class InvalidNumbersError(TypeError):
+    """Raised when the input is not a valid sequence of integers."""
+
+
+def sum_of_squares_of_even_numbers(numbers: Sequence[int]) -> int:
+    """Return the sum of squared even integers in a sequence.
+
+    Args:
+        numbers: A sequence of integers.
+
+    Returns:
+        The sum of ``value * value`` for each even integer in ``numbers``.
+
+    Raises:
+        InvalidNumbersError: If ``numbers`` is not a sequence of integers.
+    """
+    if numbers is None:
+        raise InvalidNumbersError("numbers cannot be None")
+
+    if isinstance(numbers, (str, bytes, bytearray)):
+        raise InvalidNumbersError(
+            "numbers must be a sequence of integers, not a string-like object"
+        )
+
+    if not isinstance(numbers, Sequence):
+        raise InvalidNumbersError(
+            f"numbers must be a sequence of integers, got {type(numbers).__name__}"
+        )
+
+    total = 0
+    for index, value in enumerate(numbers):
+        if isinstance(value, bool) or not isinstance(value, int):
+            raise InvalidNumbersError(
+                f"numbers[{index}] must be an int, got {type(value).__name__}: {value!r}"
+            )
+
+        if value % 2 == 0:
+            total += value * value
+
+    return total
+
+
+# Tests
+
+import pytest
+
+
+def test_sum_of_squares_of_even_numbers_happy_path():
+    assert sum_of_squares_of_even_numbers([1, 2, 3, 4, 6]) == 56
+
+
+def test_sum_of_squares_of_even_numbers_empty_sequence():
+    assert sum_of_squares_of_even_numbers([]) == 0
+
+
+def test_sum_of_squares_of_even_numbers_rejects_none():
+    with pytest.raises(InvalidNumbersError, match="cannot be None"):
+        sum_of_squares_of_even_numbers(None)  # type: ignore[arg-type]
+
+
+def test_sum_of_squares_of_even_numbers_rejects_string_like_input():
+    with pytest.raises(InvalidNumbersError, match="string-like object"):
+        sum_of_squares_of_even_numbers("2468")  # type: ignore[arg-type]
+
+
+def test_sum_of_squares_of_even_numbers_rejects_invalid_element():
+    with pytest.raises(InvalidNumbersError, match=r"numbers\[2\] must be an int"):
+        sum_of_squares_of_even_numbers([2, 4, 3.5])  # type: ignore[list-item]
