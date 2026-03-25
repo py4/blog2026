@@ -5,8 +5,16 @@
     <link>https://pooyam.dev/</link>
     <description>Personal blog about software engineering, life, and deep thoughts. Writing from Tehran to Canada.</description>
     <language>en-us</language>
-    <lastBuildDate>Mon, 23 Mar 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Tue, 24 Mar 2026 00:00:00 GMT</lastBuildDate>
     <atom:link href="https://pooyam.dev/feed.xml" rel="self" type="application/rss+xml"/>
+
+    <item>
+      <title>I Asked 3 AI Agents to "Make It Better" Until They Refused. Only One Did.</title>
+      <link>https://pooyam.dev/ai-agents-sycophancy-test.html</link>
+      <guid>https://pooyam.dev/ai-agents-sycophancy-test.html</guid>
+      <pubDate>Tue, 24 Mar 2026 00:00:00 GMT</pubDate>
+      <description>I tested Claude Opus 4.6, Gemini 3.1 Pro, and Codex GPT-5.4 to see if they'd push back when asked to keep improving already-finished code. The results split three ways.</description>
+    </item>
 
     <item>
       <title>The Priesthood of System Design</title>
