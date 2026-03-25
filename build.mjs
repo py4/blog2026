@@ -94,7 +94,7 @@ async function build() {
   }
 
   // Copy image files from src/
-  const imageFiles = await glob("src/**/*.{png,jpg,jpeg,gif,svg,webp,ico}")
+  const imageFiles = await glob("src/**/*.{png,jpg,jpeg,gif,svg,webp,ico,txt,pdf}")
   for (const file of imageFiles) {
     const outFile = file.replace("src/", "dist/")
     // Create directory if it doesn't exist
