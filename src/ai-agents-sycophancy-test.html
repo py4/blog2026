@@ -124,11 +124,11 @@ nav::after{left:24px;right:24px;height:4px}
 <h1 class="im tu bb">I Asked 3 AI Agents to &#8220;Make It Better&#8221; Until They Refused. Only One Did.</h1>
 <div class="pm im f9 tu bg b3 ib">March 24, 2026</div>
 <div class="ct">
-<p>Over the past few months I've been writing code with AI at a pace I couldn't have imagined before. Some of that is me giving specific feedback; some of it is just asking the agent to make something better. And I kept noticing the same thing: left to their own judgment, they'd start complicating things that didn't need complicating.</p>
+<p>Over the past few months I've been <a href="i-miss-coding.html">writing code</a> <a href="llms-system-design.html">with AI</a> at a pace I couldn't have imagined before. Some of that is me giving specific feedback; some of it is just asking the agent to make something better. And I kept noticing the same thing: left to their own judgment, they'd start complicating things that didn't need complicating.</p>
 
 <p>That made me want to test how well they actually push back.</p>
 
-<p>There's a reason I suspected this might be a real problem and not just a quirk. These models are heavily post trained toward maximizing reward, and most reward signals in post-training pipelines verify output correctness&mdash;does the code run, does the test pass. Unnecessary complexity is much harder to penalize because it's hard to verify automatically. That's exactly what makes RLVR so effective for math and code: the answers are checkable. But "this is over-engineered" isn't, at least not easily. So I have no idea whether anyone's actually training against it.</p>
+<p>There's a reason I suspected this might be a real problem and not just a quirk. These models are heavily post trained toward maximizing reward, and most reward signals in post-training pipelines verify output correctness&mdash;does the code run, does the test pass. Unnecessary complexity is much harder to penalize because it's hard to verify automatically. That's exactly what makes <a href="https://unsloth.ai/docs/get-started/reinforcement-learning-rl-guide" target="_blank">RLVR</a> so effective for math and code: the answers are checkable. But "this is over-engineered" isn't, at least not easily. So I have no idea whether anyone's actually training against it.</p>
 
 <p>Let's call it <a href="https://openai.com/index/sycophancy-in-gpt-4o/">sycophancy</a> for now although i'm not sure if that's the right word. The answer, it turns out, depends entirely on which agent you're using.</p>
 
