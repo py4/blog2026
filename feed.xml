@@ -10,32 +10,32 @@
 
     <item>
       <title>I Asked 3 AI Agents to "Make It Better" Until They Refused. Only One Did.</title>
-      <link>https://pooyam.dev/ai-agents-sycophancy-test.html</link>
-      <guid>https://pooyam.dev/ai-agents-sycophancy-test.html</guid>
+      <link>https://pooyam.dev/ai-agents-sycophancy-test</link>
+      <guid>https://pooyam.dev/ai-agents-sycophancy-test</guid>
       <pubDate>Tue, 24 Mar 2026 00:00:00 GMT</pubDate>
       <description>I tested Claude Opus 4.6, Gemini 3.1 Pro, and Codex GPT-5.4 to see if they'd push back when asked to keep improving already-finished code. The results split three ways.</description>
     </item>
 
     <item>
       <title>The Priesthood of System Design</title>
-      <link>https://pooyam.dev/llms-system-design.html</link>
-      <guid>https://pooyam.dev/llms-system-design.html</guid>
+      <link>https://pooyam.dev/llms-system-design</link>
+      <guid>https://pooyam.dev/llms-system-design</guid>
       <pubDate>Mon, 23 Mar 2026 00:00:00 GMT</pubDate>
       <description>People say LLMs can code but can't do system design. I disagree. System design is more pattern-matching than people admit — and if you give an LLM enough context, it can outdesign 99% of engineers.</description>
     </item>
 
     <item>
       <title>I Miss Coding</title>
-      <link>https://pooyam.dev/i-miss-coding.html</link>
-      <guid>https://pooyam.dev/i-miss-coding.html</guid>
+      <link>https://pooyam.dev/i-miss-coding</link>
+      <guid>https://pooyam.dev/i-miss-coding</guid>
       <pubDate>Tue, 17 Mar 2026 00:00:00 GMT</pubDate>
       <description>Coding agents have transformed my work at Google. But even if I keep my job, I don't enjoy this new role. I used to love figuring out the 'how.' Now the agent does it, and doing it myself is just inefficient.</description>
     </item>
 
     <item>
       <title>Browser Sessions Are All-or-Nothing</title>
-      <link>https://pooyam.dev/browser-sessions-all-or-nothing.html</link>
-      <guid>https://pooyam.dev/browser-sessions-all-or-nothing.html</guid>
+      <link>https://pooyam.dev/browser-sessions-all-or-nothing</link>
+      <guid>https://pooyam.dev/browser-sessions-all-or-nothing</guid>
       <pubDate>Sat, 15 Mar 2026 00:00:00 GMT</pubDate>
       <description>Web sessions assume a human is in control. But when AI agents take over your browser, you're either logged in with full permissions or not. We need selective authorization—read-only modes, proof-of-human-intent, and agent-aware backends.</description>
     </item>
