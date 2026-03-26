@@ -82,8 +82,11 @@ async function build() {
     console.log(`  → ${outFile} (${minified.length} bytes)`)
   }
 
-  // Copy other files (robots.txt, sitemap.xml, _headers, feed.xml)
-  const otherFiles = ["robots.txt", "sitemap.xml", "_headers", "feed.xml"]
+  // Generate feed.xml from post HTML files
+  await generateFeed()
+
+  // Copy other files (robots.txt, sitemap.xml, _headers)
+  const otherFiles = ["robots.txt", "sitemap.xml", "_headers"]
   for (const file of otherFiles) {
     try {
       await fs.copyFile(file, `dist/${file}`)
@@ -105,6 +108,64 @@ async function build() {
   }
 
   console.log("\n✅ Build complete!")
+}
+
+async function generateFeed() {
+  // Posts to include in feed, in order (newest first)
+  const postFiles = [
+    "src/ai-agents-sycophancy-test.html",
+    "src/llms-system-design.html",
+    "src/i-miss-coding.html",
+    "src/browser-sessions-all-or-nothing.html",
+  ]
+
+  const items = []
+  for (const file of postFiles) {
+    const html = await fs.readFile(file, "utf8")
+
+    const title = html.match(/<meta property="og:title" content="([^"]+)"/)?.[1]
+      ?.replace(/&quot;/g, '"').replace(/&amp;/g, "&").replace(/&#39;/g, "'")
+    const description = html.match(/<meta name="description" content="([^"]+)"/)?.[1]
+    const date = html.match(/<meta name="date" content="([^"]+)"/)?.[1]
+    const url = html.match(/<meta property="og:url" content="([^"]+)"/)?.[1]
+    const articleHtml = html.match(/<article[^>]*>([\s\S]*?)<\/article>/)?.[1]?.trim()
+
+    if (!title || !description || !date || !url || !articleHtml) {
+      console.warn(`  ⚠ Skipping ${file}: missing required fields`)
+      continue
+    }
+
+    const pubDate = new Date(date).toUTCString()
+    const encodedContent = articleHtml
+      .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+
+    items.push(`
+    <item>
+      <title>${title}</title>
+      <link>${url}</link>
+      <guid>${url}</guid>
+      <pubDate>${pubDate}</pubDate>
+      <description>${description}</description>
+      <content:encoded><![CDATA[${articleHtml}]]></content:encoded>
+    </item>`)
+  }
+
+  const lastBuildDate = new Date().toUTCString()
+  const feed = `<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Py4_ - A lens into the entropy of being</title>
+    <link>https://pooyam.dev/</link>
+    <description>Personal blog about software engineering, life, and deep thoughts. Writing from Tehran to Canada.</description>
+    <language>en-us</language>
+    <lastBuildDate>${lastBuildDate}</lastBuildDate>
+    <atom:link href="https://pooyam.dev/feed.xml" rel="self" type="application/rss+xml"/>
+${items.join("\n")}
+  </channel>
+</rss>
+`
+  await fs.writeFile("dist/feed.xml", feed)
+  console.log("Generated dist/feed.xml")
 }
 
 build().catch(console.error)
