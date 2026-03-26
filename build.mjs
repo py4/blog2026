@@ -112,34 +112,11 @@ async function build() {
 }
 
 async function generateSitemap() {
-  // Per-page config: changefreq and priority
-  const pageConfig = {
-    "index":                          { changefreq: "daily",   priority: "1.0" },
-    "about":                          { changefreq: "monthly", priority: "0.8" },
-    "contact":                        { changefreq: "monthly", priority: "0.7" },
-    "places":                         { changefreq: "monthly", priority: "0.7" },
-    "now":                            { changefreq: "weekly",  priority: "0.9" },
-    "photography":                    { changefreq: "monthly", priority: "0.8" },
-    "ai-agents-sycophancy-test":      { changefreq: "monthly", priority: "0.9" },
-    "llms-system-design":             { changefreq: "monthly", priority: "0.9" },
-    "i-miss-coding":                  { changefreq: "monthly", priority: "0.9" },
-    "browser-sessions-all-or-nothing":{ changefreq: "monthly", priority: "0.9" },
-  }
-
   const htmlFiles = await glob("src/**/*.html")
-  const slugs = htmlFiles
+  const urls = htmlFiles
     .map(f => f.replace("src/", "").replace(".html", ""))
-    .filter(s => pageConfig[s])
-    .sort((a, b) => {
-      const order = Object.keys(pageConfig)
-      return order.indexOf(a) - order.indexOf(b)
-    })
-
-  const urls = slugs.map(slug => {
-    const loc = slug === "index" ? "https://pooyam.dev/" : `https://pooyam.dev/${slug}`
-    const { changefreq, priority } = pageConfig[slug]
-    return `  <url>\n    <loc>${loc}</loc>\n    <changefreq>${changefreq}</changefreq>\n    <priority>${priority}</priority>\n  </url>`
-  })
+    .map(slug => slug === "index" ? "https://pooyam.dev/" : `https://pooyam.dev/${slug}`)
+    .map(loc => `  <url>\n    <loc>${loc}</loc>\n  </url>`)
 
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.join("\n")}\n</urlset>\n`
   await fs.writeFile("dist/sitemap.xml", sitemap)
