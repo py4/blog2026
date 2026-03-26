@@ -10,7 +10,6 @@
 <meta property="og:url" content="https://pooyam.dev/contact">
 <meta property="og:title" content="Contact - Py4_">
 <meta property="og:description" content="Get in touch with Pooya.">
-<link rel="preload" as="image" href="assets/avatar.webp">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:Georgia,serif;font-size:17px;line-height:1.7;color:#000;background:#ffed00;padding:0;max-width:100vw;overflow-x:clip}
@@ -36,7 +35,7 @@ body{font-family:Georgia,serif;font-size:17px;line-height:1.7;color:#000;backgro
 .ib{display:inline-block}
 .tr{transition:all .15s}
 header{margin-bottom:80px;padding-bottom:48px;padding-top:40px;position:sticky;top:0;background:#ffed00;z-index:100}
-.scroll-progress{position:fixed;top:0;left:0;width:0%;height:6px;background:#000;z-index:200;transition:width .1s}
+.scroll-progress{position:fixed;top:0;left:0;width:100%;height:6px;background:#000;z-index:200;transform:scaleX(0);transform-origin:left;animation:sp linear;animation-timeline:scroll()}@keyframes sp{to{transform:scaleX(1)}}
 h1{font-size:72px;font-weight:900;line-height:1;letter-spacing:-.05em;margin-bottom:20px;color:#000;display:flex;justify-content:space-between;align-items:center}
 h1 a{color:#000;text-decoration:none}
 .photo{height:72px}
@@ -67,12 +66,18 @@ nav::-webkit-scrollbar{display:none}
 }
 </style>
 <link rel="alternate" type="application/rss+xml" href="https://pooyam.dev/feed.xml" title="Py4_ RSS">
+<link rel="dns-prefetch" href="//www.linkedin.com">
+<link rel="dns-prefetch" href="//scholar.google.ca">
+<link rel="dns-prefetch" href="//www.goodreads.com">
+<link rel="dns-prefetch" href="//github.com">
+<link rel="dns-prefetch" href="//huggingface.co">
+<script type="speculationrules">{"prerender":[{"where":{"href_matches":"/*"}}]}</script>
 </head>
 <body>
 <div class="scroll-progress"></div>
 <div class="c">
 <header class="bb">
-<h1 class="ge tu"><a href="index">Py4_</a><img src="assets/avatar.webp" alt="Profile photo" class="photo"></h1>
+<h1 class="ge tu"><a href="index">Py4_</a><img src="data:image/webp;base64,UklGRvIIAABXRUJQVlA4WAoAAAAQAAAAswAAaQAAQUxQSDYDAAABkPT8/9o2PzVW4vbMECgz3BhewLgwPrl8b8bMewnttVroNHgHTOmV4riD0yJFo0Tyv4na3zDg2F/tGBETQMaVXWMz90Ov1FgyzaaaTsYiL0P3Z8ZcMpms5Dlw4/HGlxSbeOrLxpMb+92SaUgtM0FNsCWKaGCmRTKD8infpz220L1PvsmyQms4G95hy90Jn20spKabEbZo7XZLodRcVNnCtQs1hVByeo0tfu1UieF6AzpbvvB3GUue2WYIozOygZwrgkHUV5yG6X/GQD7vN8j4NkOpjRvBthhnMOOLtrzZvQmGM+G158l+SWdAxSV7Xoq8OkOqe235WPjBoCYW8jAeZ1jjR3LWpzGwWl+Oap8xtE9rc+JYZnCX5VxM6+joSg46VYZX68mq+AED7CvO5oSOkH4yi+owQxyuzuwcg3w+o+YoSpHGTG4yzNczqFdx2qr/1xIDvfSP0rdIvSv727hASkz8RVplqFelP5o+YvWx6Q9lF6tdhYgkH4Ptl4icKlqqi2ifQEvsI7rGcF8jx2O8Hjqc63itO0e+4PVlREnhlVLuMuB3g4gFXyD2YguxyGfEYgnEkmnE0vzfPI1YOolYIobY5whiWy8QexFELHgXsbtKCq+UMvIFry8jznW81p2Oh3g9dtA1vK4R7RNoiX1ELhUt1Ukk+dHySUSk7GK1qxARNX3E6mPTH9IqVqvSHzQhkBLj9Neyd0i9Lf0bLSG1RP+s38JJrf8XXcfpJmXYGEEp2pwJnUfpHGVcHcYoXJ0ZndQR0k9QlsU+hB4UZ0M9Gj5qJ2Wv6Ojo05RDeRmdZUcuqPYpNs9qKbd9GjJaH+X6SByX+DjlfiGByo8FyqPNKzAR3qJ8kP2SQERcslN+7d4EHgmvnfJtW4yjEV+0kQEnNCy2x8mY/c+ReNZPRnWuCBTEipOMK89EMdiekcnQ3X5hfXqgl4xecmrN6tZOl1AB1lzQrEy9WEMF2nJbs6rIzSYq4Maz4R3r2QmfbaACL5v0fdqzkr1PvqlyMkGpZSYQFdYgtOBMi0RmKbn333iy8SVlZqkvG49vHPBIZLKya2zmfuhlJJZMm0s6GVNfhe7PjLlkMi5WUDgglgUAABAmAJ0BKrQAagA+kUScSyWjoqUiUrxIsBIJaWv+CZADwwcjkiAFksfMZN7+exE+R8po/9A+X2CMFypXJvq74JW75OWtuSq1P6JHyFYp+NuNf+7QaZr89MmjPWm7NbNBs5MpXpErXYF8SzkMfomseCSmP0G7kyY/UcWSML6Os2rC06kIWHn3HI4rC5Yh94QoCvhimC9WFUV9tDObGJwNmL0aUp7ZFtSAQXC3Nfr+06fT+7zLrpzAr7hcrUspslOcRIJa2++Hy2ren7CosToiKQoU6tOxQmHfKibsWfJSKyGA18FV2HxOwJt7RfheCE9AIc4JcY2TNGdx8gRC5GKTdB3Cc4u6aHswz8FDYspzAcmkRe35WWt8aB7hZH0ZmA8ZdGoQVcRDf7MCxj3DlPkjNdDfKz+evx5WfgAA/ulxWe0Jt5X6DDgm9gg38KtF+3eAbKWYRvolI3eZq/oapALofgwzN/s510C7OUH8YCir6nWACuZLgvbmMgBg24ukHFWZAXuA2me4mdCDKlrXXvXftGuQ+1FLeR3eb2EwD6LujDFRkg5BQKkixnyOeLyHPu0KPp4jY5hc8bSsZe13cclfwiXfElVb7yj7VtgWSN8ymd8G3BjRh69mqeAkF0ta176RvQqP5X8Cnc+h7a+f/urW8FkK+2r4bP6tT5psDKpCg5hlo/j3i6g0mppIvusZYBXT6g28eGYPmyXgXVo2CWTdBr1IgXYEXSXv2EhvPRKsF/axOgrfKGncEcP2EVYSKTmZv0+p+BIsS/QiU4LeUfUS/qfzq447u168WUX2hApW0Cspz4ptqmxVCAY+F2JHtbOgw0iOLuKwEm6+3qGJ4H9YEw3oW2C92/tKz13e1mK5DNwdSwx018TbsSt6vZtmZyqwr2xeUpXCU2A5wEAzh4xV4v+7pKNJYhbu1Vc3bGipmIB6e8uMrWUsG5JivlnbcrObLX5F1UH82mY67MwXbCgWom1m9kmf3P+1Jji0EiROc0+PwzH3wvbk37OVGOoApH3855j1DQIHFDck6ytsusXDA6hoYF35aTfDENoZL+lSKp7bVn0sI0cjUI1VIlMvDVjSFC806VS4sNlPY26CV3RnZj2WYOU4oGSJ93rTL+3qMacmC2pe1lPhJYhZDRP16SaF1PTKqoVtmM77Bkz+21gEZu2WznTOqjlrNHdkxdIQ3UhK4Ss3u/RtsQ/6HHZHQq5Oui51t34OSroo1iPIkzpP9mh2D36MYmQ4aY6t1Kzl8QX40RY9/S566s5eMVO8S+cTT1jIiY4on++wYxw4HhIWNbWz9jbu5i9HOewMedyKvyHVsh3BXp3XHrrl1vTPdHk6fVtltPtFauN3k1kpltU1wP59xn4+Cg4LHz0sw/OhQSirLAZ/BW/302PSu7sgR2vQnJq7JHhrC1uCy0QXOXymgG8d/brqB3byN9rSaDxrehK9wlIBs42mg9Vswt5Z3ljxCCFKrrruN02SBVjxcuWu7ZsaW6NOSCZ+UKe5peEBvQedotyJ7TmedR1TkD/0m1hE5xEt089F1yNjSVW1KG0SB62Vdtig6syETSP3+RXaqh2PIutJqo2O8Mdkhwj1dzS2SkaDgRZngZeW64UmEz9bdWBYR8A7WdbpuuYmDjmr0fF7plCuHkQHL5mF4yuxrQS5Ji/7MH7d0Fvcgo27b0u07Lf7P5zdslQpM/fxfdXg0hfHOaKWejhiy3SYYAAuGbYGNfSs4KkPbpeecTCRH+38pQnvy/+BKF/qfcE//X7BGfhZmfE2ebS1209fKbdZE/IBXQOD0yB3OoyL+TN9jdGGP9N40POspYobcHD2TzT9BmLImT+25WE/ReNXechzMspSuS1WlenRxRp9FSR4j/KfVDRbviN9X+m7n0YsWP7/41gIXzYsIAAA" alt="Profile photo" class="photo" width="180" height="106" decoding="async" fetchpriority="high"></h1>
 <p class="tg vd f5">A lens into the entropy of being<span class="cur ib bgb"></span></p>
 <nav>
 <a href="index" class="btn ss f9 tu bg b3 tr">Home</a>
@@ -90,7 +95,7 @@ nav::-webkit-scrollbar{display:none}
 <footer class="vd f6 bt">
 <p>Keeping it under <a href="https://endtimes.dev/why-your-website-should-be-under-14kb-in-size/" target="_blank">14kb</a></p>
 <div class="old-links" style="white-space:nowrap">
-<a href="http://www.catb.org/hacker-emblem/" target="_blank"><img src="glider.png" loading="lazy" alt="hacker emblem" class="hacker-emblem"></a> |
+<a href="http://www.catb.org/hacker-emblem/" target="_blank"><svg class="hacker-emblem" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 5 5" width="24" height="24"><rect x="2" y="0" width="1" height="1"/><rect x="0" y="1" width="1" height="1"/><rect x="2" y="1" width="1" height="1"/><rect x="1" y="2" width="1" height="1"/><rect x="2" y="2" width="1" height="1"/></svg></a> |
 <a href="https://huggingface.co/collections/meta-llama/llama-31" target="_blank" title="Llama models"><span style="font-size:20px">🦙</span></a> |
 <a href="resume.pdf" target="_blank">Resume</a> |
 <a href="https://www.linkedin.com/in/pooyamoradi/" target="_blank">LinkedIn</a> |
@@ -98,17 +103,11 @@ nav::-webkit-scrollbar{display:none}
 <a href="https://www.goodreads.com/py4_" target="_blank">Goodreads</a> |
 <a href="https://10kb.club/" target="_blank">10kb Club</a> |
 <a href="https://indieweb.org/" target="_blank">IndieWeb</a> |
-<a href="https://github.com/kagisearch/smallweb" target="_blank"><img src="assets/small_web.png" loading="lazy" alt="Small Web" style="height:24px;vertical-align:middle"></a> |
-<a href="feed.xml" target="_blank"><img src="assets/rss.png" loading="lazy" alt="RSS Feed" style="height:24px;vertical-align:middle"></a>
+<a href="https://github.com/kagisearch/smallweb" target="_blank"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAAAPCAYAAABzyUiPAAAACXBIWXMAAA7EAAAOxAGVKw4bAAABy0lEQVRYhe1YQU7CQBR9RXsFYMDgTuPGExgWblixd8cKb0DkCCUkHoCuPIMmlS3xAIZd2UEiE3oFg3XR/DIznTKDNkaFlzTt//Pnz8ub+TNtnWq1FuOAL+MYADh/KyQZY/XCcv0FMFZPBCRDxGJyBwBoNAfpM8ENPbCuI/mCINgYT7Wiuf46vJ48A8BGQBEkmBt6WEz6aDQH4L5c6aPOErcP/18oEzICcj8GQi+13dAD4KhhaF8xjHAQsSQaaqkCwPt5P+NjXQes61iLR/Fi2atbgM42xZj8pvwmfjoOKkpbW3OIjHsrcD/GqLO0iud+nF5qm3jX9bERZxfk5dPxs+EgCegKpQskq0/c/0i8i/a9NWEioCNBbSpxGqto8bYhb8WbOGgPEUKjOcC4twJQlvyq0CaIE6CbZVOfn4COhw0HSUA1cNxb4fKsnLaJ9nQW4bR8ZCQm5swTaxfk5TONI6523URSf13ObbwlAWlPI2FEsYBKpnNrmPXpiNv4Rdvm2WaMvDibKrDNKe2BdKrOozWARLhEPBnTWZTG7Dsyp7AoIl2E1rCCxxeOebTe+/c/QlrC0qeYgg8AwbXsC27yk9Jnzj7AOfyN+R4+ATX+6z4oW+6jAAAAAElFTkSuQmCC" alt="Small Web" width="80" height="15" decoding="async" style="height:24px;vertical-align:middle"></a> |
+<a href="feed.xml" target="_blank"><svg style="height:24px;vertical-align:middle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><rect width="24" height="24" rx="4" fill="#f60"/><circle cx="6" cy="18" r="3" fill="#fff"/><path d="M4 11a8 8 0 018 8H8a4 4 0 00-4-4z" fill="#fff"/><path d="M4 4a15 15 0 0115 15h-4A11 11 0 004 8z" fill="#fff"/></svg></a>
 </div>
 </footer>
 </div>
-<script>
-window.addEventListener('scroll',()=>{
-const h=document.documentElement.scrollHeight-window.innerHeight;
-const p=(window.scrollY/h)*100;
-document.querySelector('.scroll-progress').style.width=p+'%';
-});
-</script>
+
 </body>
 </html>

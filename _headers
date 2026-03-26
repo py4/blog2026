@@ -1,3 +1,7 @@
+/*
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), interest-cohort=()
+
 /*.png
   Cache-Control: public, max-age=31536000, immutable
 
