@@ -60,6 +60,34 @@ async function build() {
       return `<style>${result.code.toString()}</style>`
     })
 
+    // Purge unused CSS per page
+    const cssMatch = html.match(/<style>([\s\S]*?)<\/style>/)
+    if (cssMatch) {
+      // Extract only class names from class="" attributes (not from content text)
+      const usedClasses = new Set()
+      for (const m of html.matchAll(/class="([^"]*)"/g)) {
+        for (const c of m[1].split(/\s+/)) if (c) usedClasses.add(c)
+      }
+      // Also keep element selectors, pseudo-classes, @keyframes, @media
+      const before = cssMatch[1].length
+      const purgedCss = cssMatch[1].replace(
+        /([^{}@]+)\{[^}]*\}/g,
+        (rule, selector) => {
+          // Keep @-rules
+          if (selector.trim().startsWith("@")) return rule
+          // Extract class names from selector
+          const selectorClasses = [...selector.matchAll(/\.([a-zA-Z][a-zA-Z0-9_-]*)/g)].map(m => m[1])
+          // Keep if no class selectors (element selectors like h1, body) or if any class is used
+          if (selectorClasses.length === 0) return rule
+          if (selectorClasses.some(c => usedClasses.has(c))) return rule
+          return "" // Remove unused rule
+        }
+      )
+      const after = purgedCss.length
+      html = html.replace(cssMatch[0], `<style>${purgedCss}</style>`)
+      console.log(`  CSS purged: ${before} → ${after} bytes (−${before - after})`)
+    }
+
     // Minify HTML with MAXIMUM aggression
     const minified = minify(Buffer.from(html), {
       do_not_minify_doctype: false,
