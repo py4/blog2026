@@ -4,12 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noai, noimageai">
-<title>Now - Py4_</title>
-<meta name="description" content="What I'm focused on right now - updated March 2026">
+<title>{{page_title}}</title>
+<meta name="description" content="{{description}}">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://pooyam.dev/now">
-<meta property="og:title" content="Now - Py4_">
-<meta property="og:description" content="What I'm focused on right now - updated March 2026">
+<meta property="og:url" content="https://pooyam.dev/{{url_path}}">
+<meta property="og:title" content="{{title}}">
+<meta property="og:description" content="{{description}}">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:Georgia,serif;font-size:17px;line-height:1.7;color:#000;background:#ffed00;padding:0;max-width:100vw;overflow-x:clip}
@@ -53,8 +53,6 @@ nav::after{content:'';position:absolute;bottom:0;left:40px;right:40px;height:8px
 .box h2{font-size:44px;margin-top:72px;margin-bottom:32px;letter-spacing:.02em;padding:20px 24px}
 .box h3{font-size:30px;margin-top:56px;margin-bottom:24px;letter-spacing:.02em;padding-bottom:12px}
 .box p{margin-bottom:28px}
-.box ul{margin-bottom:28px;padding-left:32px}
-.box li{margin-bottom:14px;padding-left:8px}
 footer{margin-top:120px;padding-top:32px;font-size:13px;color:#000;text-align:center}
 footer a{color:#000;text-decoration:underline}
 footer a:hover{color:#666}
@@ -73,10 +71,6 @@ nav::after{left:24px;right:24px;height:4px}
 .box h2{font-size:34px;padding:16px 20px;border:4px solid #000}
 .box h3{font-size:26px}
 }
-.old-links{font-size:11px;padding:8px 0;font-family:Verdana,sans-serif;white-space:nowrap}
-.old-links a{color:#00f;text-decoration:underline}
-.old-links a:visited{color:#551a8b}
-.old-links a:hover{color:#f00}
 </style>
 <link rel="preload" as="image" href="assets/avatar.webp">
 <link rel="alternate" type="application/rss+xml" href="https://pooyam.dev/feed.xml" title="Py4_ RSS">
@@ -89,46 +83,11 @@ nav::after{left:24px;right:24px;height:4px}
 <h1 class="ge tu"><a href="index">Py4_</a><img src="assets/avatar.webp" alt="Profile photo" class="photo" width="180" height="106" decoding="async" fetchpriority="high"></h1>
 <p class="tg vd f5">A lens into the entropy of being<span class="cur ib bgb"></span></p>
 </header>
-<nav>
-<a href="index" class="btn ss f9 tu bg b3 tr">Home</a>
-<a href="about" class="btn ss f9 tu bg b3 tr">About</a>
-<a href="contact" class="btn ss f9 tu bg b3 tr">Contact</a>
-<a href="places" class="btn ss f9 tu bg b3 tr">Places</a>
-<a href="photography" class="btn ss f9 tu bg b3 tr">Photography</a>
-<a href="now" class="btn btn-active ss f9 tu bgb b3 tr">Now</a>
-</nav>
-<div class="box bgw b" style="padding-top:32px">
-<p style="color:#666;font-weight:400;font-size:12px;margin-bottom:0;margin-top:0">Last updated: March 23, 2026</p>
-<h3 class="im f9 tu bb4">Location</h3>
-<p>Vancouver, Canada. Still rainy. We have some sunny days, so getting better.</p>
-
-<h3 class="im f9 tu bb4">Work</h3>
-<p>Working remotely as a senior software engineer at Google, working on efficient training of open-source LLMs on Google Cloud. Currently experimenting with transitioning from being deep in the weeds of performance optimization and making things faster, to focusing on "what" to build for Google Cloud Vertex AI. 
-    Unfortunately, with progress in AI coding, it's not as fun as it used to be to optimize code, since the returns are diminishing and the work is more about supervision than actual discovery and debugging. But I'm trying to find ways to make it fun again, and to stay close to the code as much as possible.
-</p>
-
-<h3 class="im f9 tu bb4">Upcoming</h3>
-<p>Attending <a href="https://www.googlecloudevents.com/next-vegas" target="_blank">Google Cloud Next</a> as staff.</p>
-
-<h3 class="im f9 tu bb4">Projects</h3>
-<ul>
-<li>Building this blog (My Nth blog), making sure it remains super lightweight.</li>
-</ul>
-
-<h3 class="im f9 tu bb4">Reading</h3>
-<p>Currently reading <a href="https://www.saltfatacidheat.com/" target="_blank"><em>Salt Fat Acid Heat</em></a> by Samin Nosrat &mdash; who is also Persian. These are all attempts to remove cognitive load from cooking. I want to cook intuitively, with zero thinking and zero memorization. Pure instinct. I’m currently 0% of the way there. Similar to where I am with anything art. Even my approach to photography is analytical at the moment, which bothers me.</p>
-
-<h3 class="im f9 tu bb4">Health</h3>
-<p>Focusing on reducing fat without losing muscle. Recent travels took a toll and I’ve gained weight. Getting back on track.</p>
-
-<h3 class="im f9 tu bb4">Life</h3>
-<p>Playing indoor soccer. Skiing when I can. My partner and I have been traveling so much recently. I’m gonna stick around in Vancouver for a while and enjoy it; it’s the best place to be in the summers: breweries, hiking, beaches, swimming at lakes, and most importantly, camping.</p>
-
-<p style="margin-top:72px;font-size:14px;color:#666;font-style:italic">This is a <a href="https://nownownow.com/about" target="_blank" style="color:#666">now page</a>. It's a snapshot of what I'm focused on right now. I update it monthly or when life shifts.</p>
-</div>
+{{nav}}
+<div class="box bgw b" style="padding-top:32px">{{content}}</div>
 <footer class="vd f6 bt">
 <p>Keeping it under <a href="https://endtimes.dev/why-your-website-should-be-under-14kb-in-size/" target="_blank">14kb</a></p>
-<div class="old-links">
+<div class="old-links" style="white-space:nowrap">
 <a href="http://www.catb.org/hacker-emblem/" target="_blank"><img src="glider.png" loading="lazy" alt="hacker emblem" class="hacker-emblem"></a> |
 <a href="https://huggingface.co/collections/meta-llama/llama-31" target="_blank" title="Llama models"><span style="font-size:20px">🦙</span></a> |
 <a href="resume.pdf" target="_blank">Resume</a> |
