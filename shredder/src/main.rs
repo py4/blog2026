@@ -45,6 +45,8 @@ struct Site {
     tagline: String,
     description: String,
     url: String,
+    #[serde(default)]
+    theme: Option<String>,
 }
 
 impl Site {
@@ -211,6 +213,21 @@ fn template(path: &Path) -> String {
     fs::read_to_string(path).unwrap_or_else(|e| panic!("template {}: {e}", path.display()))
 }
 
+fn themed(theme: &Path, kind: &str, name: &str) -> String {
+    let own = theme.join(kind).join(name);
+    if own.exists() {
+        template(&own)
+    } else {
+        let shared = theme
+            .parent()
+            .unwrap()
+            .join("_shared")
+            .join(kind)
+            .join(name);
+        template(&shared)
+    }
+}
+
 fn custom_blocks(markdown: &Markdown, source: &str, theme: &Path) -> String {
     let mut lines = source.lines();
     let mut out = String::new();
@@ -230,7 +247,7 @@ fn custom_blocks(markdown: &Markdown, source: &str, theme: &Path) -> String {
                     body.push('\n');
                 }
                 assert!(closed, "unclosed custom block: {name}");
-                let block = template(&theme.join("blocks").join(format!("{name}.html")));
+                let block = themed(theme, "blocks", &format!("{name}.html"));
                 out.push_str("\n\n");
                 out.push_str(&block.replace("{{body}}", &markdown.render(&body)));
                 out.push_str("\n\n");
@@ -270,7 +287,7 @@ fn cards(items: &[PostCard], theme: &Path) -> String {
     if items.is_empty() {
         return String::new();
     }
-    let template = template(&theme.join("blocks/post-card.html"));
+    let template = themed(theme, "blocks", "post-card.html");
     items
         .iter()
         .map(|post| {
@@ -290,7 +307,7 @@ fn photo_bands(items: &[Photo], theme: &Path) -> String {
     if items.is_empty() {
         return String::new();
     }
-    let template = template(&theme.join("blocks/photo-band.html"));
+    let template = themed(theme, "blocks", "photo-band.html");
     items
         .iter()
         .map(|photo| {
@@ -394,7 +411,16 @@ fn build(
             values.insert(key.clone(), escape(s));
         }
     }
-    let layout = template(&theme.join("layouts").join(format!("{}.html", page.layout)));
+    let layout = themed(theme, "layouts", &format!("{}.html", page.layout));
+    let style = theme.join("style.css");
+    values.insert(
+        "stylesheet".into(),
+        if style.exists() {
+            template(&style)
+        } else {
+            String::new()
+        },
+    );
     (fill(&layout, &values), content)
 }
 
@@ -441,7 +467,8 @@ fn main() {
     let mut content = workspace.join("content");
     let mut output = workspace.join("dist");
     let mut assets = workspace.join("src");
-    let mut theme = workspace.join("theme");
+    let mut theme = PathBuf::new();
+    let mut pinned_theme = false;
     let mut args = std::env::args().skip(1);
     while let Some(option) = args.next() {
         if option == "--help" || option == "-h" {
@@ -456,15 +483,26 @@ fn main() {
             "--content" => content = value,
             "--output" => output = value,
             "--assets" => assets = value,
-            "--theme" => theme = value,
+            "--theme" => {
+                theme = value;
+                pinned_theme = true;
+            }
             _ => panic!("unknown option {option}"),
         }
     }
-    for dir in [&content, &assets, &theme] {
+    for dir in [&content, &assets] {
         assert!(dir.is_dir(), "missing directory: {}", dir.display());
     }
-    let site: Site =
-        serde_yaml::from_str(&template(&theme.join("site.yaml"))).expect("invalid theme/site.yaml");
+    let site: Site = serde_yaml::from_str(&template(&workspace.join("site.yaml")))
+        .expect("invalid site.yaml");
+    if !pinned_theme {
+        theme = workspace.join(
+            site.theme
+                .as_deref()
+                .expect("site.yaml needs a theme: field"),
+        );
+    }
+    assert!(theme.is_dir(), "missing theme directory: {}", theme.display());
     fs::create_dir_all(&output).expect("cannot create output directory");
     let markdown = Markdown::new();
     let mut slugs = HashSet::new();
@@ -533,10 +571,21 @@ mod tests {
     use super::*;
 
     #[test]
+    fn alternate_theme_inlines_its_stylesheet() {
+        let root = Path::new(env!("CARGO_MANIFEST_DIR")).parent().unwrap();
+        let theme = root.join("themes/classic");
+        let site: Site = serde_yaml::from_str(&template(&root.join("site.yaml"))).unwrap();
+        let (page, body) = read_page(&root.join("content/pages/index.md"));
+        let (html, _) = build(&page, &body, &Markdown::new(), &theme, &site);
+        assert!(html.contains("--paper:#f9fff5"));
+        assert!(!html.contains("{{stylesheet}}"));
+    }
+
+    #[test]
     fn homepage_uses_shared_site_identity() {
         let root = Path::new(env!("CARGO_MANIFEST_DIR")).parent().unwrap();
-        let theme = root.join("theme");
-        let site: Site = serde_yaml::from_str(&template(&theme.join("site.yaml"))).unwrap();
+        let theme = root.join("themes/yellow");
+        let site: Site = serde_yaml::from_str(&template(&root.join("site.yaml"))).unwrap();
         let (page, body) = read_page(&root.join("content/pages/index.md"));
         let (html, _) = build(&page, &body, &Markdown::new(), &theme, &site);
         assert!(html.contains(&format!("<title>{}</title>", escape(&site.title()))));
@@ -549,7 +598,7 @@ mod tests {
         let theme = Path::new(env!("CARGO_MANIFEST_DIR"))
             .parent()
             .unwrap()
-            .join("theme");
+            .join("themes/yellow");
         let markdown = Markdown::new();
         let input = ":::callout\n**Hello** {{title}}\n:::\n";
         let html = markdown.render(&custom_blocks(&markdown, input, &theme));

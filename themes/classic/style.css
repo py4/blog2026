@@ -1,0 +1,50 @@
+:root{--paper:#f9fff5;--ink:#222;--link:#1f00ff;--accent:#317000;--soft:#e4f2d9}
+*{box-sizing:border-box}
+html{background:var(--paper)}
+body{max-width:960px;margin:0;padding:8px 12px 48px;color:var(--ink);font:16px/1.2 'Times New Roman',Times,serif}
+a{color:var(--link);text-decoration:underline}
+a:visited{color:#9900dd}
+a:hover{background:var(--soft)}
+a:focus-visible{outline:2px solid var(--link);outline-offset:2px}
+.site-head{background:#eee;border-bottom:2px solid var(--accent);padding:14px 16px 12px;margin-bottom:24px}
+.site-head h1{font:700 34px/1.3 'Times New Roman',Times,serif;margin:0}
+.site-head h1 a,.site-head h1 a:visited{color:var(--accent);text-decoration:none}
+.site-head a:visited{color:var(--link)}
+.tagline{margin:4px 0 14px;font-size:14px}
+nav{display:flex;gap:6px 18px;flex-wrap:wrap;font:14px/1.4 ui-monospace,SFMono-Regular,Consolas,monospace}
+nav a{text-decoration:underline}
+nav .btn-active{font-weight:700}
+main{min-height:42vh}
+h1,h2,h3{line-height:1.25}
+main h1{font-size:28px;margin:0 0 18px}
+main h2{font-size:22px;margin:30px 0 12px}
+main h3{font-size:18px;margin:25px 0 9px}
+p,ul,ol,blockquote,pre,table{margin:0 0 1.1em}
+ul,ol{padding-left:1.5em}
+li{margin-bottom:.35em}
+.posts{list-style:none;padding:0}
+.posts li{display:grid;grid-template-columns:160px 1fr;gap:14px;padding:9px 0;border-bottom:1px solid #ddd}
+.posts time,.date{font:13px/1.5 ui-monospace,SFMono-Regular,Consolas,monospace;color:#555}
+.date{margin:-10px 0 30px}
+.ct{overflow-wrap:anywhere}
+.ct a{overflow-wrap:anywhere}
+.ct blockquote{border-left:3px solid var(--accent);padding:4px 0 4px 18px;margin:24px 0}
+.ct blockquote p:last-child{margin:0}
+.ct code{font:14px/1.4 ui-monospace,SFMono-Regular,Consolas,monospace;background:#eee;padding:1px 3px}
+.ct pre{overflow-x:auto;background:#fff;border:1px solid #ccc;padding:14px;margin:22px 0}
+.ct pre code{background:none;padding:0;white-space:pre}
+.ct img,.ct svg{max-width:100%;height:auto}
+.ct hr{border:0;border-top:1px solid var(--ink);margin:36px 0}
+.ct table{border-collapse:collapse;display:block;overflow-x:auto}
+.ct th,.ct td{border:1px solid #ccc;padding:4px 8px}
+.callout{background:var(--soft);border-left:3px solid var(--accent);padding:12px 16px;margin:20px 0}
+.map-container{position:relative}
+.world-map{display:block;width:100%;height:auto;border:1px solid var(--ink)}
+.country-label{display:none}
+footer{border-top:1px solid #888;margin-top:48px;padding-top:14px;font:13px/1.6 Verdana,Geneva,sans-serif}
+.hacker-emblem{width:24px;height:24px;display:inline-block;vertical-align:middle;margin-left:8px}
+.old-links{font-size:11px;padding:8px 0;font-family:Verdana,Geneva,sans-serif;font-weight:700}
+.old-links a{color:#00f;text-decoration:underline}
+.old-links a:visited{color:#00f}
+.old-links a:hover{color:#f00;background:none}
+@media(max-width:600px){body{padding:8px;font-size:15px}.posts li{display:block}.posts time{display:block}}
