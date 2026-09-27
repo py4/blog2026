@@ -4,7 +4,7 @@ The blog, editable content, theme, and compiler live in this repository:
 
 | Directory | Purpose |
 | --- | --- |
-| `src/` | Original HTML pages kept as migration references, plus static assets |
+| `src/` | Static assets copied into the generated site |
 | `content/` | Editable Shredder Markdown source for every page and post |
 | `theme/` | Editable HTML layouts and custom block templates |
 | `shredder/` | Rust static site compiler |
@@ -13,12 +13,12 @@ The blog, editable content, theme, and compiler live in this repository:
 Build from the repository root with:
 
 ```sh
-cargo run --release --manifest-path shredder/Cargo.toml --
+bash build.sh
 ```
 
 Preview with `python3 preview.py` and open `http://127.0.0.1:8000/`. The preview server resolves extensionless links such as `/about` to `about.html`.
 
-The existing `package.json` and `build.mjs` still build from the original HTML pages for the current deployment. To publish the Markdown version, switch the hosting build command to `cargo run --release --manifest-path shredder/Cargo.toml --` and keep `dist` as the output directory. That switch should happen after the new site has been reviewed and the host provides Rust.
+The existing Cloudflare Pages build command, `npm ci && npm run build`, works during the migration: `package.json` is now a small bridge to `build.sh`, with no Node build dependencies. When the Cloudflare dashboard is available, simplify the build command to `bash build.sh`; keep `dist` as the output directory and the repository root as the root directory. The script installs Rust if the build image does not provide it, then runs Shredder with the checked-in dependency lockfile. The generated `dist/` stays ignored by Git.
 
 ## Shredder Markdown
 
@@ -54,6 +54,6 @@ This is **custom** content.
 :::
 ```
 
-Blocks cannot nest. Inline HTML remains available for one-off pieces such as the contact image. The original HTML files are retained as migration references and as the source of static assets.
+Blocks cannot nest. Inline HTML remains available for one-off pieces such as the contact image.
 
 The compiler also accepts `--content DIR`, `--output DIR`, `--assets DIR`, and `--theme DIR` to override its sibling directory defaults. It writes HTML, a sitemap, an RSS feed, and static files to the output directory. It does not delete the output directory, so remove obsolete generated files yourself if you delete a source page.

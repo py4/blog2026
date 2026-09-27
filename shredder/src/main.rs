@@ -3,7 +3,7 @@ use std::fs;
 use std::path::{Path, PathBuf};
 use std::time::Instant;
 
-use chrono::NaiveDate;
+use chrono::{NaiveDate, Utc};
 use pulldown_cmark::{html, Event, Options, Parser, Tag, TagEnd};
 use serde::Deserialize;
 use serde_yaml::Value;
@@ -384,7 +384,7 @@ fn rss(posts: &[(Page, String)], out: &Path) {
         items.push_str(&format!("<item><title>{}</title><link>{url}</link><guid>{url}</guid><pubDate>{date}</pubDate><description>{}</description><content:encoded><![CDATA[{}]]></content:encoded></item>\n",
             escape(&page.title), escape(&page.description), content.replace("]]>", "]]><![CDATA[>")));
     }
-    let xml = format!("<?xml version=\"1.0\" encoding=\"UTF-8\"?><rss version=\"2.0\" xmlns:content=\"http://purl.org/rss/1.0/modules/content/\"><channel><title>Py4_</title><link>https://pooyam.dev/</link><description>Py4_ blog</description>{items}</channel></rss>\n");
+    let xml = format!("<?xml version=\"1.0\" encoding=\"UTF-8\"?><rss version=\"2.0\" xmlns:atom=\"http://www.w3.org/2005/Atom\" xmlns:content=\"http://purl.org/rss/1.0/modules/content/\"><channel><title>Py4_ - A lens into the entropy of being</title><link>https://pooyam.dev/</link><description>Personal blog about software engineering, life, and deep thoughts. Writing from Tehran to Canada.</description><language>en-us</language><lastBuildDate>{}</lastBuildDate><atom:link href=\"https://pooyam.dev/feed.xml\" rel=\"self\" type=\"application/rss+xml\"/>{items}</channel></rss>\n", Utc::now().to_rfc2822());
     fs::write(out.join("feed.xml"), xml).expect("cannot write RSS feed");
 }
 
