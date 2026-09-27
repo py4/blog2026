@@ -1,8 +1,5 @@
 ---
-title: Py4_ - A lens into the entropy of being
 slug: index
-description: Personal blog about software engineering, life, and deep thoughts. Writing
-  from Tehran to Canada.
 layout: index
 nav_active: index
 posts:

@@ -6,7 +6,7 @@ The blog, editable content, theme, and compiler live in this repository:
 | --- | --- |
 | `src/` | Static assets copied into the generated site |
 | `content/` | Editable Shredder Markdown source for every page and post |
-| `theme/` | Editable HTML layouts and custom block templates |
+| `theme/` | Editable HTML layouts, custom block templates, and site identity in `site.yaml` |
 | `shredder/` | Rust static site compiler |
 | `dist/` | Generated website to preview or deploy |
 
@@ -40,11 +40,11 @@ Regular **Markdown** goes here. Tables, task lists, fenced code blocks,
 links, quotes, and inline HTML are supported.
 ```
 
-`slug` is the output filename without `.html`. It must be unique and contain only ASCII letters, digits, or hyphens. `title` and `layout` are required. The `layout` name selects `theme/layouts/<layout>.html`, so adding a design only requires a new template file. Existing layouts are `post`, `box`, `index`, `photography`, `places`, and `raw`. The `format` field defaults to `markdown`; `html` and `raw` pass the body through unchanged. The `places` page uses `html` for its SVG map, while `404` uses `raw` for plain text.
+`slug` is the output filename without `.html`. It must be unique and contain only ASCII letters, digits, or hyphens. `title` and `layout` are required except that the home page inherits its title from `theme/site.yaml`. The `layout` name selects `theme/layouts/<layout>.html`, so adding a design only requires a new template file. Existing layouts are `post`, `box`, `index`, `photography`, `places`, and `raw`. The `format` field defaults to `markdown`; `html` and `raw` pass the body through unchanged. The `places` page uses `html` for its SVG map, while `404` uses `raw` for plain text.
 
 Optional common fields include `description`, `nav_active`, and `font` (`sans` for a post; otherwise serif). Posts use `date` in `YYYY-MM-DD` form and `date_display` for the visible date. The home page's `posts` list controls the visible order and lets older posts remain published without appearing there. The photography page's `photos` list holds entries with `location`, `date`, `image`, `alt`, `headline`, and optional `full_width`. Additional scalar YAML fields can be used as placeholders in layout templates.
 
-The layout templates accept `{{title}}`, `{{page_title}}`, `{{description}}`, `{{slug}}`, `{{url_path}}`, `{{date}}`, `{{date_display}}`, `{{content}}`, `{{nav}}`, `{{posts}}`, `{{photos}}`, and `{{font_family}}`. Scalar front matter fields are also available as placeholders. HTML and CSS live in the theme, so a redesign does not need a Rust change. `theme/blocks/post-card.html` and `photo-band.html` control the repeated home and photography entries.
+The layout templates accept `{{title}}`, `{{page_title}}`, `{{description}}`, `{{slug}}`, `{{url_path}}`, `{{date}}`, `{{date_display}}`, `{{content}}`, `{{nav}}`, `{{posts}}`, `{{photos}}`, `{{font_family}}`, `{{site_name}}`, `{{site_tagline}}`, and `{{site_url}}`. Scalar front matter fields are also available as placeholders. Set the shared site name, tagline, description, and URL once in `theme/site.yaml`; the home page and feed use them too. HTML and CSS live in the theme, so a redesign does not need a Rust change. `theme/blocks/post-card.html` and `photo-band.html` control the repeated home and photography entries.
 
 Custom Markdown blocks use a matching file in `theme/blocks/`. For example, `:::callout` renders through `theme/blocks/callout.html`, replacing `{{body}}` with rendered Markdown:
 

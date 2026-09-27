@@ -15,6 +15,7 @@ use walkdir::WalkDir;
 
 #[derive(Debug, Deserialize)]
 struct Page {
+    #[serde(default)]
     title: String,
     slug: String,
     layout: String,
@@ -36,6 +37,20 @@ struct Page {
     photos: Vec<Photo>,
     #[serde(flatten)]
     extra: BTreeMap<String, Value>,
+}
+
+#[derive(Debug, Deserialize)]
+struct Site {
+    name: String,
+    tagline: String,
+    description: String,
+    url: String,
+}
+
+impl Site {
+    fn title(&self) -> String {
+        format!("{} - {}", self.name, self.tagline)
+    }
 }
 
 #[derive(Debug, Deserialize)]
@@ -152,7 +167,7 @@ fn read_page(path: &Path) -> (Page, String) {
     let page: Page = serde_yaml::from_str(front)
         .unwrap_or_else(|e| panic!("{}: invalid front matter: {e}", path.display()));
     assert!(
-        !page.title.is_empty(),
+        !page.title.is_empty() || page.slug == "index",
         "{}: title is required",
         path.display()
     );
@@ -297,7 +312,23 @@ fn photo_bands(items: &[Photo], theme: &Path) -> String {
         .collect()
 }
 
-fn build(page: &Page, body: &str, markdown: &Markdown, theme: &Path) -> (String, String) {
+fn build(
+    page: &Page,
+    body: &str,
+    markdown: &Markdown,
+    theme: &Path,
+    site: &Site,
+) -> (String, String) {
+    let title = if page.slug == "index" && page.title.is_empty() {
+        site.title()
+    } else {
+        page.title.clone()
+    };
+    let description = if page.slug == "index" && page.description.is_empty() {
+        &site.description
+    } else {
+        &page.description
+    };
     let content = match page.format.as_str() {
         "" | "markdown" => markdown.render(&custom_blocks(markdown, body, theme)),
         "html" | "raw" => body.to_string(),
@@ -313,15 +344,18 @@ fn build(page: &Page, body: &str, markdown: &Markdown, theme: &Path) -> (String,
         _ => content,
     };
     let mut values = HashMap::from([
-        ("title".into(), escape(&page.title)),
+        ("title".into(), escape(&title)),
         (
             "page_title".into(),
             escape(&if page.layout == "post" {
-                format!("{} - Py4_", page.title)
+                format!("{} - {}", title, site.name)
             } else {
-                page.title.clone()
+                title
             }),
         ),
+        ("site_name".into(), escape(&site.name)),
+        ("site_tagline".into(), escape(&site.tagline)),
+        ("site_url".into(), escape(site.url.trim_end_matches('/'))),
         ("slug".into(), escape(&page.slug)),
         (
             "url_path".into(),
@@ -331,7 +365,7 @@ fn build(page: &Page, body: &str, markdown: &Markdown, theme: &Path) -> (String,
                 escape(&page.slug)
             },
         ),
-        ("description".into(), escape(&page.description)),
+        ("description".into(), escape(description)),
         ("date".into(), escape(&page.date)),
         ("date_display".into(), escape(&page.date_display)),
         (
@@ -371,7 +405,7 @@ fn minify(source: &str) -> Vec<u8> {
     minify_html::minify(source.as_bytes(), &cfg)
 }
 
-fn rss(posts: &[(Page, String)], out: &Path) {
+fn rss(posts: &[(Page, String)], out: &Path, site: &Site) {
     let mut items = String::new();
     for (page, content) in posts {
         if page.date.is_empty() {
@@ -380,19 +414,22 @@ fn rss(posts: &[(Page, String)], out: &Path) {
         let date = NaiveDate::parse_from_str(&page.date, "%Y-%m-%d")
             .unwrap_or_else(|e| panic!("{}: invalid date: {e}", page.slug));
         let date = date.and_hms_opt(0, 0, 0).unwrap().and_utc().to_rfc2822();
-        let url = format!("https://pooyam.dev/{}", page.slug);
+        let url = format!("{}/{}", site.url.trim_end_matches('/'), page.slug);
         items.push_str(&format!("<item><title>{}</title><link>{url}</link><guid>{url}</guid><pubDate>{date}</pubDate><description>{}</description><content:encoded><![CDATA[{}]]></content:encoded></item>\n",
             escape(&page.title), escape(&page.description), content.replace("]]>", "]]><![CDATA[>")));
     }
-    let xml = format!("<?xml version=\"1.0\" encoding=\"UTF-8\"?><rss version=\"2.0\" xmlns:atom=\"http://www.w3.org/2005/Atom\" xmlns:content=\"http://purl.org/rss/1.0/modules/content/\"><channel><title>Py4_ - A lens into the entropy of being</title><link>https://pooyam.dev/</link><description>Personal blog about software engineering, life, and deep thoughts. Writing from Tehran to Canada.</description><language>en-us</language><lastBuildDate>{}</lastBuildDate><atom:link href=\"https://pooyam.dev/feed.xml\" rel=\"self\" type=\"application/rss+xml\"/>{items}</channel></rss>\n", Utc::now().to_rfc2822());
+    let xml = format!("<?xml version=\"1.0\" encoding=\"UTF-8\"?><rss version=\"2.0\" xmlns:atom=\"http://www.w3.org/2005/Atom\" xmlns:content=\"http://purl.org/rss/1.0/modules/content/\"><channel><title>{}</title><link>{}/</link><description>{}</description><language>en-us</language><lastBuildDate>{}</lastBuildDate><atom:link href=\"{}/feed.xml\" rel=\"self\" type=\"application/rss+xml\"/>{items}</channel></rss>\n", escape(&site.title()), escape(site.url.trim_end_matches('/')), escape(&site.description), Utc::now().to_rfc2822(), escape(site.url.trim_end_matches('/')));
     fs::write(out.join("feed.xml"), xml).expect("cannot write RSS feed");
 }
 
-fn sitemap(slugs: &[String], out: &Path) {
+fn sitemap(slugs: &[String], out: &Path, site: &Site) {
     let mut xml = String::from("<?xml version=\"1.0\" encoding=\"UTF-8\"?><urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">");
     for slug in slugs {
         let path = if slug == "index" { "" } else { slug };
-        xml.push_str(&format!("<url><loc>https://pooyam.dev/{path}</loc></url>"));
+        xml.push_str(&format!(
+            "<url><loc>{}/{path}</loc></url>",
+            escape(site.url.trim_end_matches('/'))
+        ));
     }
     xml.push_str("</urlset>\n");
     fs::write(out.join("sitemap.xml"), xml).expect("cannot write sitemap");
@@ -426,6 +463,8 @@ fn main() {
     for dir in [&content, &assets, &theme] {
         assert!(dir.is_dir(), "missing directory: {}", dir.display());
     }
+    let site: Site =
+        serde_yaml::from_str(&template(&theme.join("site.yaml"))).expect("invalid theme/site.yaml");
     fs::create_dir_all(&output).expect("cannot create output directory");
     let markdown = Markdown::new();
     let mut slugs = HashSet::new();
@@ -445,7 +484,7 @@ fn main() {
                 "duplicate slug: {}",
                 page.slug
             );
-            let (html, article) = build(&page, &body, &markdown, &theme);
+            let (html, article) = build(&page, &body, &markdown, &theme, &site);
             let bytes = if page.format == "raw" {
                 html.into_bytes()
             } else {
@@ -462,8 +501,8 @@ fn main() {
     posts.sort_by(|a, b| b.0.date.cmp(&a.0.date));
     let mut slugs: Vec<_> = slugs.into_iter().filter(|slug| slug != "404").collect();
     slugs.sort();
-    rss(&posts, &output);
-    sitemap(&slugs, &output);
+    rss(&posts, &output, &site);
+    sitemap(&slugs, &output, &site);
     for file in ["robots.txt", "_headers"] {
         let source = assets.parent().unwrap().join(file);
         if source.exists() {
@@ -492,6 +531,18 @@ fn main() {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn homepage_uses_shared_site_identity() {
+        let root = Path::new(env!("CARGO_MANIFEST_DIR")).parent().unwrap();
+        let theme = root.join("theme");
+        let site: Site = serde_yaml::from_str(&template(&theme.join("site.yaml"))).unwrap();
+        let (page, body) = read_page(&root.join("content/pages/index.md"));
+        let (html, _) = build(&page, &body, &Markdown::new(), &theme, &site);
+        assert!(html.contains(&format!("<title>{}</title>", escape(&site.title()))));
+        assert!(html.contains(&format!("<p class=\"tg vd f5\">{}", escape(&site.tagline))));
+        assert!(html.contains(&format!("content=\"{}\"", escape(&site.description))));
+    }
 
     #[test]
     fn custom_block_uses_theme_and_keeps_inserted_text_literal() {
