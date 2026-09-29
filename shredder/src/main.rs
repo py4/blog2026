@@ -411,6 +411,17 @@ fn build(
             values.insert(key.clone(), escape(s));
         }
     }
+    values.insert(
+        "ai_use".into(),
+        match page.extra.get("ai_use").and_then(Value::as_str) {
+            None | Some("revised_draft") => {
+                "AI Use: Draft fully by me, AI revised it.".to_string()
+            }
+            Some("no_ai") => "No AI use.".to_string(),
+            Some("grammer") => "AI Use: Grammer".to_string(),
+            Some(other) => panic!("{}: unsupported ai_use {other}", page.slug),
+        },
+    );
     let layout = themed(theme, "layouts", &format!("{}.html", page.layout));
     let style = theme.join("style.css");
     values.insert(
@@ -591,6 +602,24 @@ mod tests {
         assert!(html.contains(&format!("<title>{}</title>", escape(&site.title()))));
         assert!(html.contains(&format!("<p class=\"tg vd f5\">{}", escape(&site.tagline))));
         assert!(html.contains(&format!("content=\"{}\"", escape(&site.description))));
+    }
+
+    #[test]
+    fn ai_use_flag_maps_values_and_defaults() {
+        let root = Path::new(env!("CARGO_MANIFEST_DIR")).parent().unwrap();
+        let theme = root.join("themes/classic");
+        let site: Site = serde_yaml::from_str(&template(&root.join("site.yaml"))).unwrap();
+        let markdown = Markdown::new();
+        let build_with = |front: &str| {
+            let page: Page = serde_yaml::from_str(front).unwrap();
+            build(&page, "", &markdown, &theme, &site).0
+        };
+        assert!(build_with("title: T\nslug: t\nlayout: post")
+            .contains("AI Use: Draft fully by me, AI revised it."));
+        assert!(build_with("title: T\nslug: t\nlayout: post\nai_use: no_ai")
+            .contains("No AI use."));
+        assert!(build_with("title: T\nslug: t\nlayout: post\nai_use: grammer")
+            .contains("AI Use: Grammer"));
     }
 
     #[test]

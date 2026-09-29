@@ -26,6 +26,9 @@ li{margin-bottom:.35em}
 .posts li{display:grid;grid-template-columns:160px 1fr;gap:14px;padding:9px 0;border-bottom:1px solid #ddd}
 .posts time,.date{font:13px/1.5 ui-monospace,SFMono-Regular,Consolas,monospace;color:#555}
 .date{margin:-10px 0 30px}
+.ai-use{margin-left:8px;color:#c00;font-weight:700}
+.ai-use::before{content:"| ";color:#888;font-weight:400}
+.ai-use:empty{display:none}
 .ct{overflow-wrap:anywhere}
 .ct a{overflow-wrap:anywhere}
 .ct blockquote{border-left:3px solid var(--accent);padding:4px 0 4px 18px;margin:24px 0}
