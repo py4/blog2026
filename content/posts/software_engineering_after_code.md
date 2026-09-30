@@ -3,7 +3,7 @@ title: Software Engineering After Code
 date: '2026-09-30'
 date_display: September 30, 2026
 description: "Software engineering career is being rapidly changed. We no longer design & implement. Implementation is cheap now. What matters now is figuring out: what to implement (product), in what shape and behaviour (spec, constraints), how to make agents efficiently work on it (harness, guardrails) and how to verify/validate it. Unfortunately, the problem-solving part is fading."
-slug: software-engineer-after-code
+slug: software-engineering-after-code
 layout: post
 ai_use: no_ai
 ---
@@ -11,7 +11,7 @@ ai_use: no_ai
 In the past 9–10 months, as I delegated more and more of design and implementation to AI, I accepted that my former work life is fully over, long before [DHH](https://x.com/dhh/status/2102936073642869121) talked about it at Rails World 2026.
 I have successfully completed the [5 stages of grief](https://en.wikipedia.org/wiki/Five_stages_of_grief). AI skeptics always think that those people who claim AI is taking over SWE tasks are working on CRUD apps with trivial backend/frontend. I work on performance of LLM training and inference on GPUs and TPUs. Anything verifiable (most SWE applications) is [RLVR-able](https://rlvrbook.com/) and an easy target for AI. Consider the most difficult example of recent works, [navier stokes](https://openai.com/index/navier-stokes-solution/) problem. They ran 10K agents working 88 hours in parallel trying different ideas. I don't think our day-to-day *design & implementation* problems are more difficult than proving navier stokes. 
 
-I really need to write another blog post on how I personally feel as a human about all these, but that's a topic for another time.
+I really need to write another blog post on [how I personally feel as a human](i-miss-coding) about all these, but that's a topic for another time.
 
 Reflecting upon past couple of months, I decided to write this position article on where the job is moving, at least in the near future. In the current AI landscape, 1 year is equivalent to 5 years, so I have zero confidence about predicting beyond 1 year, but I guess the following makes sense to me within the next 1 year.
 
@@ -54,5 +54,5 @@ When the agent delivers something, how should we verify it? Unless you are worki
 You have a black box. How do you make sure it's working as expected without actually needing to understand the details of it? 
 
 ## Moral of the Story
-I am happy that I experienced a pre-AI SWE career and I think the old problem solving, coding, system design, … are all gone. I've accepted it. 
+I am happy that I experienced a pre-AI SWE career and I think the old problem solving, coding, [system design](llms-system-design), … are all gone. I've accepted it. 
 Implementation is cheap now. What matters now is figuring out: what to implement (product), in what shape and behaviour (spec, constraints), how to make agents efficiently work on it (harness, guardrails) and how to verify/validate it. Unfortunately, the problem-solving part is fading.
