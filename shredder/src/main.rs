@@ -55,7 +55,7 @@ impl Site {
     }
 }
 
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Deserialize, Clone)]
 struct PostCard {
     slug: String,
     date: String,
@@ -281,6 +281,21 @@ fn nav(active: &str) -> String {
     }
     out.push_str("</nav>");
     out
+}
+
+fn auto_cards(posts: &[(Page, String)]) -> Vec<PostCard> {
+    posts
+        .iter()
+        .map(|(page, _)| PostCard {
+            slug: page.slug.clone(),
+            date: if page.date_display.is_empty() {
+                page.date.clone()
+            } else {
+                page.date_display.clone()
+            },
+            title: page.title.clone(),
+        })
+        .collect()
 }
 
 fn cards(items: &[PostCard], theme: &Path) -> String {
@@ -517,7 +532,7 @@ fn main() {
     fs::create_dir_all(&output).expect("cannot create output directory");
     let markdown = Markdown::new();
     let mut slugs = HashSet::new();
-    let mut posts = Vec::new();
+    let mut posts: Vec<(Page, String)> = Vec::new();
     for group in ["posts", "pages"] {
         let mut paths: Vec<_> = WalkDir::new(content.join(group))
             .into_iter()
@@ -526,13 +541,22 @@ fn main() {
             .map(|e| e.into_path())
             .collect();
         paths.sort();
+        let auto_posts = if group == "pages" {
+            posts.sort_by(|a, b| b.0.date.cmp(&a.0.date));
+            auto_cards(&posts)
+        } else {
+            Vec::new()
+        };
         for path in paths {
-            let (page, body) = read_page(&path);
+            let (mut page, body) = read_page(&path);
             assert!(
                 slugs.insert(page.slug.clone()),
                 "duplicate slug: {}",
                 page.slug
             );
+            if group == "pages" && page.layout == "index" && page.posts.is_empty() {
+                page.posts = auto_posts.clone();
+            }
             let (html, article) = build(&page, &body, &markdown, &theme, &site);
             let bytes = if page.format == "raw" {
                 html.into_bytes()
@@ -547,7 +571,6 @@ fn main() {
             }
         }
     }
-    posts.sort_by(|a, b| b.0.date.cmp(&a.0.date));
     let mut slugs: Vec<_> = slugs.into_iter().filter(|slug| slug != "404").collect();
     slugs.sort();
     rss(&posts, &output, &site);
@@ -620,6 +643,25 @@ mod tests {
             .contains("No AI use."));
         assert!(build_with("title: T\nslug: t\nlayout: post\nai_use: grammer")
             .contains("AI Use: Grammer"));
+    }
+
+    #[test]
+    fn auto_cards_use_display_date_and_all_posts() {
+        let page = |slug: &str, date: &str, display: &str| -> Page {
+            serde_yaml::from_str(&format!(
+                "title: T\nslug: {slug}\nlayout: post\ndate: {date}\ndate_display: {display}"
+            ))
+            .unwrap()
+        };
+        let posts = vec![
+            (page("a", "2026-01-02", "January 2, 2026"), String::new()),
+            (page("b", "2026-01-01", ""), String::new()),
+        ];
+        let cards = auto_cards(&posts);
+        assert_eq!(cards.len(), 2);
+        assert_eq!(cards[0].slug, "a");
+        assert_eq!(cards[0].date, "January 2, 2026");
+        assert_eq!(cards[1].date, "2026-01-01");
     }
 
     #[test]
